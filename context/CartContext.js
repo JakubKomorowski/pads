@@ -1,27 +1,47 @@
-import { useState, useEffect, useRef, useContext, createContext, useCallback } from 'react'
+import { useContext, createContext, useCallback } from 'react'
+import { useLocalStorage } from '../hooks/useLocalStorage'
 
 const CartContext = createContext()
 export const useCart = () => useContext(CartContext)
 
-const loadJSON = key => key && JSON.parse(localStorage.getItem(key))
-const saveJSON = (key, data) => localStorage.setItem(key, JSON.stringify(data))
-
 const CartProvider = ({ children }) => {
-  const key = `STRIPE_CART_ITEMS`
-  const firstRender = useRef(true)
-  const [items, setItems] = useState([])
+  const [items, setItems] = useLocalStorage(`STRIPE_CART_ITEMS`, [])
 
-  useEffect(() => {
-    if (firstRender.current) {
-      firstRender.current = false
-      const localItems = loadJSON(key)
-      localItems && setItems(localItems)
-      return
+  const increaseQuantity = price => {
+    items.forEach(item => {
+      if (item.id === price.id) {
+        item.quantity = item.quantity + 1
+      }
+    })
+    setItems([...items])
+  }
+
+  const addItem = price => {
+    if (items.length !== 0) {
+      if (price.currency !== items[0].currency) return
     }
-    saveJSON(key, items)
-  }, [key, items])
 
-  const addItem = useCallback(price => setItems(prices => prices.concat([price])), [])
+    if (items.length !== 0) {
+      items.forEach(item => {
+        if (item.id === price.id) {
+          item.quantity = item.quantity + 1
+        }
+      })
+    }
+
+    let isProductAlreadyInCart
+
+    items.forEach(el => {
+      if (el.id === price.id) {
+        isProductAlreadyInCart = true
+      }
+    })
+    if (isProductAlreadyInCart) {
+      setItems([...new Set([...items])])
+    } else {
+      setItems([...items, { ...price, quantity: 1 }])
+    }
+  }
   const removeItem = useCallback(
     id => setItems(prices => prices.filter(price => price.id !== id)),
     []
@@ -29,7 +49,9 @@ const CartProvider = ({ children }) => {
   const resetCart = useCallback(() => setItems([]), [])
 
   return (
-    <CartContext.Provider value={{ items, addItem, removeItem, resetCart }}>
+    <CartContext.Provider
+      value={{ items, addItem, removeItem, resetCart, increaseQuantity }}
+    >
       {children}
     </CartContext.Provider>
   )

@@ -19,11 +19,11 @@ extend({ CameraControls })
 const FrontPad = () => {
   const [model, setModel] = useState()
   useEffect(() => {
-    new GLTFLoader().load('/assets/front.gltf', setModel)
+    new GLTFLoader().load('/assets/hinge-pads.gltf', setModel)
   }, [])
 
   return (
-    <mesh rotation={[0, -0.5, 0]} position={[0, -0.1, 0]} receiveShadow>
+    <mesh rotation={[0, -0.0, 0]} position={[0.015, -0.1, 0.0]} receiveShadow>
       {model ? <primitive object={model.scene} /> : null}
     </mesh>
   )
@@ -39,10 +39,11 @@ const Control = () => {
 
   return (
     <orbitControls
-      maxPolarAngle={Math.PI / 2}
-      minPolarAngle={Math.PI / 4}
       args={[camera, gl.domElement]}
       enableZoom={false}
+      autoRotate={true}
+      autoRotateSpeed={0.2}
+      enableDamping={true}
       ref={orbitRef}
     />
   )
@@ -55,11 +56,11 @@ function Controls() {
 
   useFrame((state, delta) => {
     // update camera angles according to mouse position
-    ref.current.azimuthAngle = -state.mouse.x / 5
-    ref.current.polarAngle = Math.PI / 2 + state.mouse.y / 5
+    ref.current.azimuthAngle = -state.mouse.x / 15
+    ref.current.polarAngle = Math.PI / 2 + state.mouse.y / 15
     ref.current.dollySpeed = 0
     ref.current.truckSpeed = 0
-
+    ref.current.disconnect()
     ref.current.update(delta)
     // console.log(state);
   })
@@ -69,7 +70,7 @@ function Controls() {
 
 const Home = () => {
   return (
-    <section className=' flex justify-center items-center flex-grow container mx-auto'>
+    <section className=' flex justify-center items-center flex-grow container mx-auto h-[calc(100vh-65px)]'>
       <div className='w-2/6 min-w-[500px]'>
         <div className='text-5xl font-bold font-mukta mb-10 leading-tight'>
           Build with comfort and <br /> customizability in mind
@@ -79,8 +80,18 @@ const Home = () => {
         </button>
       </div>
 
-      <div className=' w-4/6 h-full'>
-        <Canvas camera={{ position: [0, 0, 0.25] }}>
+      <div className=' w-4/6 h-full cursor-grab	'>
+        <Canvas
+          orthographic
+          camera={{
+            position: [0, 0, 0.25],
+            left: -2,
+            right: 2,
+            top: 2,
+            bottom: -2,
+            zoom: 2500
+          }}
+        >
           <ambientLight intensity={0.8} />
           <spotLight
             position={[-5, 0, 5]}
@@ -90,7 +101,7 @@ const Home = () => {
           />
           <spotLight position={[5, 0, 0]} penumbra={1} castShadow />
 
-          <Controls />
+          <Control />
           <FrontPad />
         </Canvas>
       </div>

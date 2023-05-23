@@ -15,9 +15,8 @@ const Layout = ({ children }) => {
         open={cartSliderIsOpen}
         setCartSliderIsOpen={setCartSliderIsOpen}
       />
-      <div className='container mx-auto flex flex-grow flex-col'>
-        {children}
-      </div>
+      {/* <div className='container mx-auto flex flex-grow flex-col'> */}
+      <div className='px-16 '>{children}</div>
 
       <Footer />
     </div>

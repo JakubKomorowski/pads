@@ -1,10 +1,12 @@
 import Link from 'next/link'
 import { useCart } from '../context/CartContext'
 import { MENU_LIST } from '../routes'
+import Dropdown from './Dropdown'
 import NavItem from './NavItem'
 
 const Header = ({ setCartSliderIsOpen }) => {
   const { items } = useCart()
+  const itemsNumber = items.reduce((acc, curr) => (acc += curr.quantity), 0)
   return (
     <nav className=' border-b border-grey px-16 font-mukta text-xl '>
       <div className='container mx-auto flex justify-between h-16 items-center'>
@@ -29,6 +31,9 @@ const Header = ({ setCartSliderIsOpen }) => {
               </li>
             )
           })}
+          <li>
+            <Dropdown />
+          </li>
           <li
             onClick={() => setCartSliderIsOpen(open => !open)}
             className='cursor-pointer relative transition-all w-min-content
@@ -36,7 +41,7 @@ const Header = ({ setCartSliderIsOpen }) => {
             hover:before:w-full hover:before:left-0 hover:before:black'
           >
             Cart
-            <span className='ml-1 '>({items.length})</span>
+            <span className='ml-1 '>({itemsNumber})</span>
             <span className='sr-only'>items in cart, view bag</span>
           </li>
         </ul>

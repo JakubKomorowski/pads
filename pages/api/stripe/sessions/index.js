@@ -13,7 +13,7 @@ const handler = async (req, res) => {
         line_items: lineItems,
         mode: 'payment',
         success_url: `${req.headers.origin}/checkout/success?sessionId={CHECKOUT_SESSION_ID}`,
-        cancel_url: req.headers.origin,
+        cancel_url: req.headers.origin
       })
 
       return res.status(201).json({ session })

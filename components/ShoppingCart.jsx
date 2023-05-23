@@ -6,13 +6,18 @@ import { useCart } from '../context/CartContext'
 import { checkout } from '../lib/checkout'
 
 export default function ShoppingCartSlideOver({ open, setCartSliderIsOpen }) {
-  const { items, removeItem } = useCart()
-  const subTotal = items.reduce((acc, curr) => (acc += curr.unit_amount), 0)
+  const { items, removeItem, increaseQuantity } = useCart()
+  const subTotal = items.reduce(
+    (acc, curr) => (acc += curr.unit_amount * curr.quantity),
+    0
+  )
 
   const handleCheckout = event => {
     event.preventDefault()
     checkout(items)
   }
+
+  // console.log(items[0].currency)
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -83,15 +88,15 @@ export default function ShoppingCartSlideOver({ open, setCartSliderIsOpen }) {
                                       <h3>
                                         <a href={price.product.href}>
                                           {' '}
-                                          {price.product.name}{' '}
+                                          {price.product.name}
                                         </a>
                                       </h3>
                                       <p className='ml-4'>
                                         {(
                                           price.unit_amount / 100
-                                        ).toLocaleString('en-CA', {
+                                        ).toLocaleString('en-US', {
                                           style: 'currency',
-                                          currency: 'CAD'
+                                          currency: price.currency
                                         })}
                                       </p>
                                     </div>
@@ -100,8 +105,14 @@ export default function ShoppingCartSlideOver({ open, setCartSliderIsOpen }) {
                                     </p>
                                   </div>
                                   <div className='flex flex-1 items-end justify-between text-sm'>
-                                    <p className='text-gray-500'>Qty 1</p>
-
+                                    <p className='text-gray-500'>
+                                      Qty {price.quantity}
+                                    </p>
+                                    <button
+                                      onClick={() => increaseQuantity(price)}
+                                    >
+                                      add one
+                                    </button>
                                     <div className='flex'>
                                       <button
                                         type='button'
@@ -124,9 +135,11 @@ export default function ShoppingCartSlideOver({ open, setCartSliderIsOpen }) {
                       <div className='flex justify-between text-base font-medium text-gray-900'>
                         <p>Subtotal</p>
                         <p>
-                          {(subTotal / 100).toLocaleString('en-CA', {
+                          {(subTotal / 100).toLocaleString('en-US', {
                             style: 'currency',
-                            currency: 'CAD'
+                            currency: items[0]?.currency
+                              ? items[0]?.currency
+                              : 'eur'
                           })}
                         </p>
                       </div>

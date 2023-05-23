@@ -29,12 +29,15 @@ function CheckoutSuccessPage() {
     quantity: item.quantity
   }))
 
+  console.log(checkoutSession)
+
   const payment =
     checkoutSession?.payment_intent?.charges?.data[0]?.payment_method_details
   const subtotal = checkoutSession?.amount_subtotal
   const total = checkoutSession?.amount_total
   const discount = checkoutSession?.total_details?.amount_discount
   const tax = checkoutSession?.total_details?.amount_tax
+  const currency = checkoutSession?.currency
 
   return (
     <div className='bg-white'>
@@ -91,10 +94,14 @@ function CheckoutSuccessPage() {
                     <div className='pl-4 flex sm:pl-6'>
                       <dt className='font-medium text-gray-900'>Price</dt>
                       <dd className='ml-2 text-gray-700'>
-                        {(product.price / 100).toLocaleString('en-CA', {
-                          style: 'currency',
-                          currency: 'CAD'
-                        })}
+                        {currency === 'usd'
+                          ? (product.price / 100).toLocaleString('en-US', {
+                              style: 'currency',
+                              currency: currency
+                            })
+                          : `${
+                              (product.price / 100) * product.quantity
+                            } ${currency}`}
                       </dd>
                     </div>
                   </dl>
@@ -153,38 +160,46 @@ function CheckoutSuccessPage() {
               <div className='flex justify-between'>
                 <dt className='font-medium text-gray-900'>Subtotal</dt>
                 <dd className='text-gray-700'>
-                  {(subtotal / 100).toLocaleString('en-CA', {
-                    style: 'currency',
-                    currency: 'CAD'
-                  })}
+                  {currency === 'usd'
+                    ? (subtotal / 100).toLocaleString('en-US', {
+                        style: 'currency',
+                        currency: currency
+                      })
+                    : `${subtotal / 100} ${currency}`}
                 </dd>
               </div>
               <div className='flex justify-between'>
                 <dt className='flex font-medium text-gray-900'>Discount</dt>
                 <dd className='text-gray-700'>
                   -
-                  {(discount / 100).toLocaleString('en-CA', {
-                    style: 'currency',
-                    currency: 'CAD'
-                  })}
+                  {currency === 'usd'
+                    ? (discount / 100).toLocaleString('en-US', {
+                        style: 'currency',
+                        currency: currency
+                      })
+                    : `${discount / 100} ${currency}`}
                 </dd>
               </div>
               <div className='flex justify-between'>
                 <dt className='font-medium text-gray-900'>Tax</dt>
                 <dd className='text-gray-700'>
-                  {(tax / 100).toLocaleString('en-CA', {
-                    style: 'currency',
-                    currency: 'CAD'
-                  })}
+                  {currency === 'usd'
+                    ? (tax / 100).toLocaleString('en-US', {
+                        style: 'currency',
+                        currency: currency
+                      })
+                    : `${tax / 100} ${currency}`}
                 </dd>
               </div>
               <div className='flex justify-between'>
                 <dt className='font-medium text-gray-900'>Total</dt>
                 <dd className='text-gray-900'>
-                  {(total / 100).toLocaleString('en-CA', {
-                    style: 'currency',
-                    currency: 'CAD'
-                  })}
+                  {currency === 'usd'
+                    ? (total / 100).toLocaleString('en-US', {
+                        style: 'currency',
+                        currency: currency
+                      })
+                    : `${total / 100} ${currency}`}
                 </dd>
               </div>
             </dl>
