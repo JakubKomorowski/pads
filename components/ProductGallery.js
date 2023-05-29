@@ -31,7 +31,7 @@ const ProductGallery = () => {
 
   const renderItem = () => {
     return (
-      <div class='h-screen cursor-grab'>
+      <div className='h-screen cursor-grab'>
         <Canvas
           orthographic
           camera={{
