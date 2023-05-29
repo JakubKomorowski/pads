@@ -1,7 +1,6 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useRef } from 'react'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import {
   Canvas,
   extend,
@@ -11,23 +10,11 @@ import {
 } from 'react-three-fiber'
 import { useSpring, animated } from '@react-spring/three'
 import CameraControls from 'camera-controls'
+import FrontPad from '../components/SplitPad'
 
 extend({ OrbitControls })
 CameraControls.install({ THREE })
 extend({ CameraControls })
-
-const FrontPad = () => {
-  const [model, setModel] = useState()
-  useEffect(() => {
-    new GLTFLoader().load('/assets/hinge-pads.gltf', setModel)
-  }, [])
-
-  return (
-    <mesh rotation={[0, -0.0, 0]} position={[0.015, -0.1, 0.0]} receiveShadow>
-      {model ? <primitive object={model.scene} /> : null}
-    </mesh>
-  )
-}
 
 const Control = () => {
   const orbitRef = useRef()
@@ -45,6 +32,7 @@ const Control = () => {
       autoRotateSpeed={0.2}
       enableDamping={true}
       ref={orbitRef}
+      enablePan={false}
     />
   )
 }
