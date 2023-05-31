@@ -50,7 +50,6 @@ function Controls() {
     ref.current.truckSpeed = 0
     ref.current.disconnect()
     ref.current.update(delta)
-    // console.log(state);
   })
 
   return <cameraControls ref={ref} args={[camera, gl.domElement]} />

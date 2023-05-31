@@ -17,8 +17,6 @@ export default function ShoppingCartSlideOver({ open, setCartSliderIsOpen }) {
     checkout(items)
   }
 
-  // console.log(items[0].currency)
-
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as='div' className='relative z-10' onClose={setCartSliderIsOpen}>

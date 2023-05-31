@@ -12,7 +12,7 @@ export default function Dropdown() {
   const { handleCurrency, currency } = useCurrency()
 
   return (
-    <Menu as='div' className='relative inline-block text-left'>
+    <Menu as='div' className='relative inline-block text-left text-lg'>
       <div>
         <Menu.Button className='flex items-center'>
           {currency === 'eur'

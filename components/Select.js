@@ -9,13 +9,12 @@ function classNames(...classes) {
 
 export default function Select({ data, selected, setSelected }) {
   const products = data?.map(el => el.product)
-  console.log(products)
   return (
     <Listbox value={selected} onChange={setSelected}>
       {({ open }) => (
         <>
           <Listbox.Label className='block text-sm font-medium text-gray-700'>
-            Assigned to
+            Accent color
           </Listbox.Label>
           <div className='relative mt-1'>
             <Listbox.Button className='relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm'>
@@ -26,7 +25,7 @@ export default function Select({ data, selected, setSelected }) {
                   className='h-6 w-6 flex-shrink-0 rounded-full'
                 />
                 <span className='ml-3 block truncate'>
-                  {selected?.description}
+                  {selected?.unit_label}
                 </span>
               </span>
               <span className='pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2'>
@@ -70,7 +69,7 @@ export default function Select({ data, selected, setSelected }) {
                               'ml-3 block truncate'
                             )}
                           >
-                            {product.description}
+                            {product.unit_label}
                           </span>
                         </div>
 

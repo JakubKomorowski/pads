@@ -60,7 +60,8 @@ const ProductDetails = ({ prices, id }) => {
     addItem(price)
   }
 
-  console.log('first', currencyData)
+  console.log('third', currencyData)
+  console.log('sec', selected)
 
   useEffect(() => {
     const timeout = setTimeout(() => setError(''), 3000)
@@ -68,18 +69,30 @@ const ProductDetails = ({ prices, id }) => {
   }, [error])
 
   const itemToCard = currencyData?.find(el => el.product?.id === selected?.id)
+  const selectedPrice =
+    currencyData?.find(el => el.product?.id === selected?.id) || currencyData[0]
+
+  console.log('slected privce', selectedPrice)
 
   return (
-    <div className='w-100vw h-screen cursor-grab'>
-      <div>
+    <div className='w-100vw h-screen cursor-grab flex gap-5  pt-10'>
+      <ProductGallery />
+      <div className='w-1/2'>
+        <h2 className='text-3xl font-bold mb-4'>{selected.name}</h2>
+        <p className='relative text-3xl text-black group-hover:text-black mb-4 font-light'>
+          {(selectedPrice.unit_amount / 100).toLocaleString('en-US', {
+            style: 'currency',
+            currency: currency
+          })}
+        </p>
+        <p className='mb-4'>{selectedPrice.product.description}</p>
         <Select
           data={currencyData}
           selected={selected}
           setSelected={setSelected}
         />
+        <button onClick={() => addItemToCart(itemToCard)}>add</button>
       </div>
-      <button onClick={() => addItemToCart(itemToCard)}>add</button>
-      <ProductGallery />
     </div>
   )
 }

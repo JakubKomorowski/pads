@@ -19,7 +19,7 @@ const Products = ({ prices: { data = [] } }) => {
   const unique = [
     ...new Map(currencyData.map(item => [item.product[key], item])).values()
   ]
-  console.log('here', unique)
+
   return (
     <div>
       <h2 className='text-2xl font-bold text-gray-900 mt-4'>Online Courses</h2>

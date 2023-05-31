@@ -25,7 +25,7 @@ const Header = ({ setCartSliderIsOpen }) => {
                 key={menu.text}
                 className='relative transition-all w-min-content
                 before:w-0 before:h-px before:absolute before:bottom-0 before:right-0 before:bg-black before:transition-all before:duration-300
-                hover:before:w-full hover:before:left-0 hover:before:black'
+                hover:before:w-full hover:before:left-0 hover:before:black text-lg'
               >
                 <NavItem {...menu} />
               </li>
@@ -38,7 +38,7 @@ const Header = ({ setCartSliderIsOpen }) => {
             onClick={() => setCartSliderIsOpen(open => !open)}
             className='cursor-pointer relative transition-all w-min-content
             before:w-0 before:h-px before:absolute before:bottom-0 before:right-0 before:bg-black before:transition-all before:duration-300
-            hover:before:w-full hover:before:left-0 hover:before:black'
+            hover:before:w-full hover:before:left-0 hover:before:black text-lg'
           >
             Cart
             <span className='ml-1 '>({itemsNumber})</span>

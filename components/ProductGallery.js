@@ -31,7 +31,7 @@ const ProductGallery = () => {
 
   const renderItem = () => {
     return (
-      <div className='h-screen cursor-grab'>
+      <div className='h-full cursor-grab aspect-square bg-bg'>
         <Canvas
           orthographic
           camera={{
@@ -40,7 +40,7 @@ const ProductGallery = () => {
             right: 2,
             top: 2,
             bottom: -2,
-            zoom: 2500
+            zoom: 2000
           }}
         >
           <ambientLight intensity={0.8} />
@@ -80,7 +80,7 @@ const ProductGallery = () => {
 
   const LeftNav = ({ onClick }) => (
     <button
-      className='image-gallery-icon image-gallery-left-nav'
+      className='text-white absolute bg-transprent appearance-none border-none cursor-pointer outline-none z-10 hover:text-gray-200 image-gallery-left-nav'
       onClick={onClick}
     >
       <svg
@@ -89,23 +89,52 @@ const ProductGallery = () => {
         viewBox='0 0 24 24'
         strokeWidth={1.5}
         stroke='currentColor'
-        className='w-6 h-6 block align-middle'
+        className='w-6 h-6 block align-middle '
       >
         <path
-          strokeLinecap='round'
-          strokeLinejoin='round'
-          d='M15.75 19.5L8.25 12l7.5-7.5'
+          fill='none'
+          stroke-linecap='round'
+          stroke-linejoin='round'
+          stroke-width='2'
+          d='m15.5 5-7 7 7 7'
+        />
+      </svg>
+    </button>
+  )
+
+  const RightNav = ({ onClick }) => (
+    <button
+      className='text-white absolute bg-transprent appearance-none border-none cursor-pointer outline-none z-10 hover:scale-200 right-0 image-gallery-right-nav '
+      onClick={onClick}
+    >
+      <svg
+        xmlns='http://www.w3.org/2000/svg'
+        fill='none'
+        viewBox='0 0 24 24'
+        strokeWidth={1.5}
+        stroke='currentColor'
+        className='w-6 h-6 block align-middle hover:scale-200'
+      >
+        <path
+          fill='none'
+          stroke-linecap='round'
+          stroke-linejoin='round'
+          stroke-width='2'
+          d='m9 5 7 7-7 7'
         />
       </svg>
     </button>
   )
 
   return (
-    <ImageGallery
-      items={images}
-      showPlayButton={false}
-      renderLeftNav={(onClick, disabled) => <LeftNav onClick={onClick} />}
-    />
+    <div className='w-1/2'>
+      <ImageGallery
+        items={images}
+        showPlayButton={false}
+        renderLeftNav={(onClick, disabled) => <LeftNav onClick={onClick} />}
+        renderRightNav={(onClick, disabled) => <RightNav onClick={onClick} />}
+      />
+    </div>
   )
 }
 

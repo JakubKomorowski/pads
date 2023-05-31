@@ -16,6 +16,7 @@ export function useLocalStorage(key, fallbackValue) {
       return
     }
     saveJSON(key, value)
+    console.log(JSON.stringify(value))
   }, [key, value])
 
   return [value, setValue]
