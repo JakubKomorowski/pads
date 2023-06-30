@@ -17,6 +17,8 @@ export default function ShoppingCartSlideOver({ open, setCartSliderIsOpen }) {
     checkout(items)
   }
 
+  console.log(items)
+
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as='div' className='relative z-10' onClose={setCartSliderIsOpen}>
@@ -148,7 +150,7 @@ export default function ShoppingCartSlideOver({ open, setCartSliderIsOpen }) {
                         <a
                           href='#'
                           onClick={handleCheckout}
-                          className='flex items-center justify-center rounded-md border border-transparent bg-emerald-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-emerald-700'
+                          className='flex items-center justify-center rounded-md border border-transparent bg-main px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-dark'
                         >
                           Checkout
                         </a>
@@ -158,7 +160,7 @@ export default function ShoppingCartSlideOver({ open, setCartSliderIsOpen }) {
                           or{' '}
                           <button
                             type='button'
-                            className='font-medium text-emerald-600 hover:text-emerald-500'
+                            className='font-medium text-main hover:text-dark'
                             onClick={() => setCartSliderIsOpen(false)}
                           >
                             Continue Shopping

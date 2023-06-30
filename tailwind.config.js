@@ -14,11 +14,15 @@ module.exports = {
       },
       fontFamily: {
         mukta: 'Mukta'
+      },
+      gridTemplateColumns: {
+        fluid: 'repeat(auto-fit, minmax(350px, 450px))'
       }
     }
   },
   plugins: [
     require('@tailwindcss/forms'),
-    require('@headlessui/tailwindcss')({ prefix: 'ui' })
+    require('@headlessui/tailwindcss')({ prefix: 'ui' }),
+    require('daisyui')
   ]
 }

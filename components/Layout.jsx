@@ -8,14 +8,13 @@ const Layout = ({ children }) => {
   const [cartSliderIsOpen, setCartSliderIsOpen] = useState(false)
 
   return (
-    <div className='h-screen flex flex-col '>
+    <div className='min-h-screen flex flex-col pb-8'>
       <Header setCartSliderIsOpen={setCartSliderIsOpen} />
 
       <ShoppingCartSlideOver
         open={cartSliderIsOpen}
         setCartSliderIsOpen={setCartSliderIsOpen}
       />
-      {/* <div className='container mx-auto flex flex-grow flex-col'> */}
       <div className='px-16 '>{children}</div>
 
       <Footer />

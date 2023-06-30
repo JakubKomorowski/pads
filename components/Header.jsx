@@ -3,6 +3,7 @@ import { useCart } from '../context/CartContext'
 import { MENU_LIST } from '../routes'
 import Dropdown from './Dropdown'
 import NavItem from './NavItem'
+import Image from 'next/image'
 
 const Header = ({ setCartSliderIsOpen }) => {
   const { items } = useCart()
@@ -13,7 +14,12 @@ const Header = ({ setCartSliderIsOpen }) => {
         <Link href='/'>
           <div className='flex items-center gap-3 cursor-pointer'>
             <div className='w-8 h-8'>
-              <img className='w-8 h-8' src='/assets/logo.svg' alt='logo' />
+              <Image
+                width='32px'
+                height='32px'
+                src='/assets/logo.svg'
+                alt='logo'
+              />
             </div>
             Logo
           </div>

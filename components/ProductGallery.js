@@ -1,83 +1,8 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import ImageGallery from 'react-image-gallery'
 import 'react-image-gallery/styles/css/image-gallery.css'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import { Canvas, useThree, useFrame, extend } from 'react-three-fiber'
-import FrontPad from './SplitPad'
 
-const ProductGallery = () => {
-  extend({ OrbitControls })
-
-  const Control = () => {
-    const orbitRef = useRef()
-    const { camera, gl } = useThree()
-
-    useFrame(() => {
-      orbitRef.current.update()
-    })
-
-    return (
-      <orbitControls
-        args={[camera, gl.domElement]}
-        enableZoom={false}
-        autoRotate={false}
-        autoRotateSpeed={0.2}
-        enableDamping={true}
-        ref={orbitRef}
-        enablePan={false}
-      />
-    )
-  }
-
-  const renderItem = () => {
-    return (
-      <div className='h-full cursor-grab aspect-square bg-bg'>
-        <Canvas
-          orthographic
-          camera={{
-            position: [0, 0, 0.25],
-            left: -2,
-            right: 2,
-            top: 2,
-            bottom: -2,
-            zoom: 2000
-          }}
-        >
-          <ambientLight intensity={0.8} />
-          <spotLight
-            position={[-5, 0, 5]}
-            intensity={1}
-            castShadow
-            angle={Math.PI}
-          />
-          <spotLight position={[5, 0, 0]} penumbra={1} castShadow />
-          <Control />
-          <FrontPad />
-        </Canvas>
-      </div>
-    )
-  }
-
-  const images = [
-    {
-      original: 'https://picsum.photos/id/1018/1000/600/',
-      thumbnail: 'https://picsum.photos/id/1018/250/150/'
-    },
-    {
-      original: 'https://picsum.photos/id/1015/1000/600/',
-      thumbnail: 'https://picsum.photos/id/1015/250/150/'
-    },
-    {
-      original: 'https://picsum.photos/id/1019/1000/600/',
-      thumbnail: 'https://picsum.photos/id/1019/250/150/'
-    },
-    {
-      original: 'https://picsum.photos/id/1019/1000/600/',
-      thumbnail: 'https://picsum.photos/id/1019/250/150/',
-      renderItem: renderItem.bind(this)
-    }
-  ]
-
+const ProductGallery = ({ images }) => {
   const LeftNav = ({ onClick }) => (
     <button
       className='text-white absolute bg-transprent appearance-none border-none cursor-pointer outline-none z-10 hover:text-gray-200 image-gallery-left-nav'
@@ -93,9 +18,9 @@ const ProductGallery = () => {
       >
         <path
           fill='none'
-          stroke-linecap='round'
-          stroke-linejoin='round'
-          stroke-width='2'
+          strokeLinecap='round'
+          strokeLinejoin='round'
+          strokeWidth='2'
           d='m15.5 5-7 7 7 7'
         />
       </svg>
@@ -117,9 +42,9 @@ const ProductGallery = () => {
       >
         <path
           fill='none'
-          stroke-linecap='round'
-          stroke-linejoin='round'
-          stroke-width='2'
+          strokeLinecap='round'
+          strokeLinejoin='round'
+          strokeWidth='2'
           d='m9 5 7 7-7 7'
         />
       </svg>
@@ -127,7 +52,7 @@ const ProductGallery = () => {
   )
 
   return (
-    <div className='w-1/2'>
+    <div className='w-1/2 cursor-grab'>
       <ImageGallery
         items={images}
         showPlayButton={false}

@@ -7,7 +7,7 @@ import {
   useThree,
   useFrame,
   ReactThreeFiber
-} from 'react-three-fiber'
+} from '@react-three/fiber'
 import { useSpring, animated } from '@react-spring/three'
 import CameraControls from 'camera-controls'
 import FrontPad from '../components/SplitPad'
@@ -29,7 +29,7 @@ const Control = () => {
       args={[camera, gl.domElement]}
       enableZoom={false}
       autoRotate={true}
-      autoRotateSpeed={0.2}
+      autoRotateSpeed={0}
       enableDamping={true}
       ref={orbitRef}
       enablePan={false}

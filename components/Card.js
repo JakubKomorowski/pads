@@ -25,31 +25,27 @@ const Card = ({ price }) => {
         }
       >
         <div className='relative group'>
-          <div className='relative w-full h-96 rounded-lg overflow-hidden '>
-            <Image
-              src={product.images[0]}
-              alt={product.description}
-              className='object-scale-down '
-              layout='fill'
-            />
-          </div>
-          <div className='relative mt-2'>
-            <h3 className='text-lg font-medium text-gray-900'>
-              {product.name}
-            </h3>
-            <p className='mt-1 text-sm text-gray-500'>{product.description}</p>
-          </div>
-          <div className='absolute top-0 inset-x-0 h-96 rounded-lg p-4 flex items-end justify-end overflow-hidden'>
-            <div
-              aria-hidden='true'
-              className='absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-black opacity-50'
-            />
-            <p className='relative text-lg font-semibold text-white group-hover:text-black'>
-              {(unit_amount / 100).toLocaleString('en-US', {
-                style: 'currency',
-                currency: currency
-              })}
-            </p>
+          <div className='card w-96 bg-base-100 shadow-xl'>
+            <figure>
+              {' '}
+              <div className='relative w-full h-80 rounded-lg overflow-hidden '>
+                <Image
+                  src={product.images[0]}
+                  alt={product.description}
+                  className='object-cover w-full'
+                  layout='fill'
+                />
+              </div>
+            </figure>
+            <div className='card-body '>
+              <h2 className='card-title'>{product.name}</h2>
+              <p>{product.description}</p>
+              <div className='card-actions justify-end'>
+                <button className='btn btn-primary bg-main text-white border-none hover:bg-dark'>
+                  Buy Now
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </Link>

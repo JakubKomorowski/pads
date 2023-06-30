@@ -29,8 +29,6 @@ function CheckoutSuccessPage() {
     quantity: item.quantity
   }))
 
-  console.log(checkoutSession)
-
   const payment =
     checkoutSession?.payment_intent?.charges?.data[0]?.payment_method_details
   const subtotal = checkoutSession?.amount_subtotal

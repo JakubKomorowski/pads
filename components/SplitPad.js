@@ -4,7 +4,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 const FrontPad = () => {
   const [model, setModel] = useState()
   useEffect(() => {
-    new GLTFLoader().load('/assets/hinge-pads.gltf', setModel)
+    new GLTFLoader().load('/assets/split/white.gltf', setModel)
   }, [])
 
   return (

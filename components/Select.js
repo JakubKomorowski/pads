@@ -2,6 +2,7 @@ import { Fragment, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import { useCart } from '../context/CartContext'
+import Image from 'next/image'
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
@@ -9,6 +10,8 @@ function classNames(...classes) {
 
 export default function Select({ data, selected, setSelected }) {
   const products = data?.map(el => el.product)
+  const filteredProducts = products.filter(el => el.unit_label)
+
   return (
     <Listbox value={selected} onChange={setSelected}>
       {({ open }) => (
@@ -17,9 +20,11 @@ export default function Select({ data, selected, setSelected }) {
             Accent color
           </Listbox.Label>
           <div className='relative mt-1'>
-            <Listbox.Button className='relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm'>
+            <Listbox.Button className='relative  cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-main focus:outline-none focus:ring-1 focus:ring-main sm:text-sm'>
               <span className='flex items-center'>
-                <img
+                <Image
+                  width='24px'
+                  height='24px'
                   src={selected?.images[0]}
                   alt=''
                   className='h-6 w-6 flex-shrink-0 rounded-full'
@@ -43,13 +48,13 @@ export default function Select({ data, selected, setSelected }) {
               leaveFrom='opacity-100'
               leaveTo='opacity-0'
             >
-              <Listbox.Options className='absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
-                {products.map(product => (
+              <Listbox.Options className='absolute z-10 mt-1 max-h-56  overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
+                {filteredProducts.map(product => (
                   <Listbox.Option
                     key={product.id}
                     className={({ active }) =>
                       classNames(
-                        active ? 'text-white bg-indigo-600' : 'text-gray-900',
+                        active ? 'text-white bg-main' : 'text-gray-900',
                         'relative cursor-default select-none py-2 pl-3 pr-9'
                       )
                     }
@@ -58,8 +63,14 @@ export default function Select({ data, selected, setSelected }) {
                     {({ selected, active }) => (
                       <>
                         <div className='flex items-center'>
-                          <img
-                            src={product.images[0]}
+                          <Image
+                            width='24px'
+                            height='24px'
+                            src={
+                              product.unit_label === 'yellow'
+                                ? '/assets/colors/yellow rect.png'
+                                : '/assets/colors/black rect.png'
+                            }
                             alt=''
                             className='h-6 w-6 flex-shrink-0 rounded-full'
                           />
@@ -76,7 +87,7 @@ export default function Select({ data, selected, setSelected }) {
                         {selected ? (
                           <span
                             className={classNames(
-                              active ? 'text-white' : 'text-indigo-600',
+                              active ? 'text-white' : 'text-main',
                               'absolute inset-y-0 right-0 flex items-center pr-4'
                             )}
                           >

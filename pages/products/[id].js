@@ -5,6 +5,10 @@ import { useCart } from '../../context/CartContext'
 import { useCurrency } from '../../context/CurrencyContext'
 import 'react-image-gallery/styles/css/image-gallery.css'
 import ProductGallery from '../../components/ProductGallery'
+import 'react-image-gallery/styles/css/image-gallery.css'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
+import { Canvas, useThree, useFrame, extend } from '@react-three/fiber'
+import FrontPad from '../../components/SplitPad'
 
 export async function getStaticPaths() {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
@@ -44,24 +48,21 @@ const ProductDetails = ({ prices, id }) => {
     item => item.product.name.replace(/\s+/g, '-').toLowerCase() === id
   )
   const [currencyData, setCurrencyData] = useState(data)
+  const [selected, setSelected] = useState(currencyData[0].product)
+  const { items, addItem } = useCart()
+  const [error, setError] = useState('')
 
   useEffect(() => {
     const filteredData = data?.filter(el => {
       return el.currency === currency
     })
     setCurrencyData(filteredData)
+    setSelected(filteredData[0].product)
   }, [currency])
-
-  const [selected, setSelected] = useState(currencyData[0].product)
-  const { items, addItem } = useCart()
-  const [error, setError] = useState('')
 
   const addItemToCart = price => {
     addItem(price)
   }
-
-  console.log('third', currencyData)
-  console.log('sec', selected)
 
   useEffect(() => {
     const timeout = setTimeout(() => setError(''), 3000)
@@ -72,11 +73,95 @@ const ProductDetails = ({ prices, id }) => {
   const selectedPrice =
     currencyData?.find(el => el.product?.id === selected?.id) || currencyData[0]
 
-  console.log('slected privce', selectedPrice)
+  extend({ OrbitControls })
+
+  const Control = () => {
+    const orbitRef = useRef()
+    const { camera, gl } = useThree()
+
+    useFrame(() => {
+      orbitRef.current.update()
+    })
+
+    return (
+      <orbitControls
+        args={[camera, gl.domElement]}
+        enableZoom={false}
+        autoRotate={false}
+        autoRotateSpeed={0.2}
+        enableDamping={true}
+        ref={orbitRef}
+        enablePan={false}
+      />
+    )
+  }
+
+  const renderItem = () => {
+    return (
+      <div className='h-full cursor-grab aspect-square bg-bg'>
+        <Canvas
+          orthographic
+          camera={{
+            position: [0, 0, 0.25],
+            left: -2,
+            right: 2,
+            top: 2,
+            bottom: -2,
+            zoom: 2000
+          }}
+        >
+          <ambientLight intensity={0.8} />
+          <spotLight
+            position={[-5, 0, 5]}
+            intensity={1}
+            castShadow
+            angle={Math.PI}
+          />
+          <spotLight position={[5, 0, 0]} penumbra={1} castShadow />
+          <Control />
+          <FrontPad />
+        </Canvas>
+      </div>
+    )
+  }
+
+  const images =
+    selectedPrice.product.name === 'Pad test'
+      ? [
+          {
+            original: 'https://picsum.photos/id/1018/1000/600/',
+            thumbnail: 'https://picsum.photos/id/1018/250/150/'
+          },
+          {
+            original: 'https://picsum.photos/id/1015/1000/600/',
+            thumbnail: 'https://picsum.photos/id/1015/250/150/'
+          },
+          {
+            original: 'https://picsum.photos/id/1019/1000/600/',
+            thumbnail: 'https://picsum.photos/id/1019/250/150/'
+          },
+          {
+            original: 'https://picsum.photos/id/1019/1000/600/',
+            thumbnail: 'https://picsum.photos/id/1019/250/150/',
+            renderItem: renderItem.bind(this)
+          }
+        ]
+      : [
+          {
+            original: 'https://picsum.photos/id/1018/1000/600/',
+            thumbnail: 'https://picsum.photos/id/1018/250/150/'
+          },
+
+          {
+            original: 'https://picsum.photos/id/1019/1000/600/',
+            thumbnail: 'https://picsum.photos/id/1019/250/150/',
+            renderItem: renderItem.bind(this)
+          }
+        ]
 
   return (
-    <div className='w-100vw h-screen cursor-grab flex gap-5  pt-10'>
-      <ProductGallery />
+    <div className='w-100vw h-screen  flex gap-5  pt-10'>
+      <ProductGallery images={images} />
       <div className='w-1/2'>
         <h2 className='text-3xl font-bold mb-4'>{selected.name}</h2>
         <p className='relative text-3xl text-black group-hover:text-black mb-4 font-light'>

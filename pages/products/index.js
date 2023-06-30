@@ -20,11 +20,14 @@ const Products = ({ prices: { data = [] } }) => {
     ...new Map(currencyData.map(item => [item.product[key], item])).values()
   ]
 
+  const uniqueProducts = currencyData.filter(el => !el.product.unit_label)
+  console.log(uniqueProducts)
+
   return (
     <div>
       <h2 className='text-2xl font-bold text-gray-900 mt-4'>Online Courses</h2>
-      <div className='mt-8 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-3 xl:gap-x-8'>
-        {unique.map(price => (
+      <div className='mt-8 grid gap-y-12 grid-cols-fluid'>
+        {uniqueProducts.map(price => (
           <Card key={price.id} price={price} />
         ))}
       </div>
