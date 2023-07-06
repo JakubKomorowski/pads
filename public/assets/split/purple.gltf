@@ -191,9 +191,9 @@
             "name" : "Aluminum - Anodized Glossy (Blue).002",
             "pbrMetallicRoughness" : {
                 "baseColorFactor" : [
-                    0.6038163900375366,
-                    0.4385458827018738,
-                    0.5833232402801514,
+                    0.5028864145278931,
+                    0.5028865337371826,
+                    1,
                     1
                 ],
                 "metallicFactor" : 1,
@@ -218,9 +218,9 @@
             "name" : "Aluminum - Anodized Glossy (Blue).003",
             "pbrMetallicRoughness" : {
                 "baseColorFactor" : [
-                    0.5488523840904236,
-                    0.39824631810188293,
-                    0.5352204442024231,
+                    0.5028864145278931,
+                    0.5028865337371826,
+                    1,
                     1
                 ],
                 "metallicFactor" : 1,

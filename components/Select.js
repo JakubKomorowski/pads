@@ -11,7 +11,6 @@ function classNames(...classes) {
 export default function Select({ data, selected, setSelected }) {
   const products = data?.map(el => el.product)
   const filteredProducts = products.filter(el => el.unit_label)
-
   return (
     <Listbox value={selected} onChange={setSelected}>
       {({ open }) => (
@@ -25,7 +24,7 @@ export default function Select({ data, selected, setSelected }) {
                 <Image
                   width='24px'
                   height='24px'
-                  src={selected?.images[0]}
+                  src={`/assets/colors/${selected.unit_label} rect.png`}
                   alt=''
                   className='h-6 w-6 flex-shrink-0 rounded-full'
                 />
@@ -66,11 +65,7 @@ export default function Select({ data, selected, setSelected }) {
                           <Image
                             width='24px'
                             height='24px'
-                            src={
-                              product.unit_label === 'yellow'
-                                ? '/assets/colors/yellow rect.png'
-                                : '/assets/colors/black rect.png'
-                            }
+                            src={`/assets/colors/${product.unit_label} rect.png`}
                             alt=''
                             className='h-6 w-6 flex-shrink-0 rounded-full'
                           />

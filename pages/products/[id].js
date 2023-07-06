@@ -8,7 +8,8 @@ import ProductGallery from '../../components/ProductGallery'
 import 'react-image-gallery/styles/css/image-gallery.css'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { Canvas, useThree, useFrame, extend } from '@react-three/fiber'
-import FrontPad from '../../components/SplitPad'
+import SplitPad from '../../components/SplitPad'
+import useWindowDimensions from '../../hooks/useWindowDimensions'
 
 export async function getStaticPaths() {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
@@ -31,7 +32,7 @@ export const getStaticProps = async context => {
   const id = context.params.id
   const prices = await stripe.prices.list({
     active: true,
-    limit: 10,
+    limit: 80,
     expand: ['data.product']
   })
   return {
@@ -51,13 +52,14 @@ const ProductDetails = ({ prices, id }) => {
   const [selected, setSelected] = useState(currencyData[0].product)
   const { items, addItem } = useCart()
   const [error, setError] = useState('')
+  const { width } = useWindowDimensions()
 
   useEffect(() => {
     const filteredData = data?.filter(el => {
       return el.currency === currency
     })
     setCurrencyData(filteredData)
-    setSelected(filteredData[0].product)
+    setSelected(filteredData[0]?.product)
   }, [currency])
 
   const addItemToCart = price => {
@@ -86,7 +88,7 @@ const ProductDetails = ({ prices, id }) => {
     return (
       <orbitControls
         args={[camera, gl.domElement]}
-        enableZoom={false}
+        enableZoom={true}
         autoRotate={false}
         autoRotateSpeed={0.2}
         enableDamping={true}
@@ -98,7 +100,7 @@ const ProductDetails = ({ prices, id }) => {
 
   const renderItem = () => {
     return (
-      <div className='h-full cursor-grab aspect-square bg-bg'>
+      <div className=' aspect-video cursor-grab  bg-bg mx-auto'>
         <Canvas
           orthographic
           camera={{
@@ -107,7 +109,7 @@ const ProductDetails = ({ prices, id }) => {
             right: 2,
             top: 2,
             bottom: -2,
-            zoom: 2000
+            zoom: width > 1535 ? 2000 : 1500
           }}
         >
           <ambientLight intensity={0.8} />
@@ -119,7 +121,7 @@ const ProductDetails = ({ prices, id }) => {
           />
           <spotLight position={[5, 0, 0]} penumbra={1} castShadow />
           <Control />
-          <FrontPad />
+          <SplitPad name={selected.name} color={selected.unit_label} />
         </Canvas>
       </div>
     )
@@ -160,7 +162,7 @@ const ProductDetails = ({ prices, id }) => {
         ]
 
   return (
-    <div className='w-100vw h-screen  flex gap-5  pt-10'>
+    <div className='container mx-auto h-screen  flex gap-8  pt-10'>
       <ProductGallery images={images} />
       <div className='w-1/2'>
         <h2 className='text-3xl font-bold mb-4'>{selected.name}</h2>

@@ -14,7 +14,7 @@ const ProductGallery = ({ images }) => {
         viewBox='0 0 24 24'
         strokeWidth={1.5}
         stroke='currentColor'
-        className='w-6 h-6 block align-middle '
+        className='w-12 h-12 block align-middle '
       >
         <path
           fill='none'
@@ -38,7 +38,7 @@ const ProductGallery = ({ images }) => {
         viewBox='0 0 24 24'
         strokeWidth={1.5}
         stroke='currentColor'
-        className='w-6 h-6 block align-middle hover:scale-200'
+        className='w-12 h-12 block align-middle hover:scale-200'
       >
         <path
           fill='none'
@@ -52,7 +52,7 @@ const ProductGallery = ({ images }) => {
   )
 
   return (
-    <div className='w-1/2 cursor-grab'>
+    <div className='w-1/2 cursor-grab aspect-video'>
       <ImageGallery
         items={images}
         showPlayButton={false}

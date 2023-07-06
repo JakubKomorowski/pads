@@ -30,8 +30,8 @@ const Card = ({ price }) => {
               {' '}
               <div className='relative w-full h-80 rounded-lg overflow-hidden '>
                 <Image
-                  src={product.images[0]}
-                  alt={product.description}
+                  src={product?.images[0]}
+                  alt={product?.description}
                   className='object-cover w-full'
                   layout='fill'
                 />

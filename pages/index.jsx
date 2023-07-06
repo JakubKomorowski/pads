@@ -28,8 +28,8 @@ const Control = () => {
     <orbitControls
       args={[camera, gl.domElement]}
       enableZoom={false}
-      autoRotate={true}
-      autoRotateSpeed={0}
+      autoRotate={false}
+      autoRotateSpeed={0.1}
       enableDamping={true}
       ref={orbitRef}
       enablePan={false}

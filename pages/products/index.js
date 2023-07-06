@@ -15,18 +15,19 @@ const Products = ({ prices: { data = [] } }) => {
     setCurrencyData(filteredData)
   }, [currency])
 
+  console.log(currencyData)
+
   const key = 'name'
   const unique = [
     ...new Map(currencyData.map(item => [item.product[key], item])).values()
   ]
 
   const uniqueProducts = currencyData.filter(el => !el.product.unit_label)
-  console.log(uniqueProducts)
 
   return (
-    <div>
+    <div className='container mx-auto'>
       <h2 className='text-2xl font-bold text-gray-900 mt-4'>Online Courses</h2>
-      <div className='mt-8 grid gap-y-12 grid-cols-fluid'>
+      <div className='mt-8 grid gap-y-12 gap-x-8 grid-cols-fluid'>
         {uniqueProducts.map(price => (
           <Card key={price.id} price={price} />
         ))}
@@ -39,7 +40,7 @@ export async function getServerSideProps() {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
   const prices = await stripe.prices.list({
     active: true,
-    limit: 10,
+    limit: 80,
     expand: ['data.product']
   })
 

@@ -175,7 +175,7 @@
         },
         {
             "doubleSided" : true,
-            "name" : "Rubber - Soft",
+            "name" : "Rubber - Soft.004",
             "pbrMetallicRoughness" : {
                 "baseColorFactor" : [
                     0.15294118225574493,
@@ -191,11 +191,12 @@
             "name" : "Aluminum - Anodized Glossy (Blue).002",
             "pbrMetallicRoughness" : {
                 "baseColorFactor" : [
-                    0.6823529601097107,
-                    0.32156863808631897,
-                    0.40392157435417175,
+                    1,
+                    0.21586047112941742,
+                    0.35640019178390503,
                     1
                 ],
+                "metallicFactor" : 1,
                 "roughnessFactor" : 0.5527864098548889
             }
         },
@@ -217,9 +218,9 @@
             "name" : "Aluminum - Anodized Glossy (Blue).003",
             "pbrMetallicRoughness" : {
                 "baseColorFactor" : [
-                    0.6151777505874634,
-                    0.2866256535053253,
-                    0.36494138836860657,
+                    1,
+                    0.21586047112941742,
+                    0.35640019178390503,
                     1
                 ],
                 "metallicFactor" : 1,

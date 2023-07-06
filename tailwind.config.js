@@ -16,7 +16,7 @@ module.exports = {
         mukta: 'Mukta'
       },
       gridTemplateColumns: {
-        fluid: 'repeat(auto-fit, minmax(350px, 450px))'
+        fluid: 'repeat(auto-fit, minmax(350px, 390px))'
       }
     }
   },
