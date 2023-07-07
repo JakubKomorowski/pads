@@ -10,7 +10,7 @@ function classNames(...classes) {
 
 export default function Select({ data, selected, setSelected }) {
   const products = data?.map(el => el.product)
-  const filteredProducts = products.filter(el => el.unit_label)
+  const filteredProducts = products?.filter(el => el.unit_label)
   return (
     <Listbox value={selected} onChange={setSelected}>
       {({ open }) => (
@@ -50,7 +50,7 @@ export default function Select({ data, selected, setSelected }) {
               <Listbox.Options className='absolute z-10 mt-1 max-h-56  overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
                 {filteredProducts.map(product => (
                   <Listbox.Option
-                    key={product.id}
+                    key={product?.id}
                     className={({ active }) =>
                       classNames(
                         active ? 'text-white bg-main' : 'text-gray-900',
@@ -65,7 +65,7 @@ export default function Select({ data, selected, setSelected }) {
                           <Image
                             width='24px'
                             height='24px'
-                            src={`/assets/colors/${product.unit_label} rect.png`}
+                            src={`/assets/colors/${product?.unit_label} rect.png`}
                             alt=''
                             className='h-6 w-6 flex-shrink-0 rounded-full'
                           />
@@ -75,7 +75,7 @@ export default function Select({ data, selected, setSelected }) {
                               'ml-3 block truncate'
                             )}
                           >
-                            {product.unit_label}
+                            {product?.unit_label}
                           </span>
                         </div>
 

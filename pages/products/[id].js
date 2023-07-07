@@ -35,11 +35,15 @@ export const getStaticProps = async context => {
     limit: 80,
     expand: ['data.product']
   })
+  if (id === 'pad-test-2') {
+    return { notFound: true }
+  }
   return {
     props: {
       prices,
       id
-    }
+    },
+    notFound: false
   }
 }
 
@@ -49,7 +53,7 @@ const ProductDetails = ({ prices, id }) => {
     item => item.product.name.replace(/\s+/g, '-').toLowerCase() === id
   )
   const [currencyData, setCurrencyData] = useState(data)
-  const [selected, setSelected] = useState(currencyData[0].product)
+  const [selected, setSelected] = useState(currencyData[0]?.product)
   const { items, addItem } = useCart()
   const [error, setError] = useState('')
   const { width } = useWindowDimensions()
@@ -121,14 +125,14 @@ const ProductDetails = ({ prices, id }) => {
           />
           <spotLight position={[5, 0, 0]} penumbra={1} castShadow />
           <Control />
-          <SplitPad name={selected.name} color={selected.unit_label} />
+          <SplitPad name={selected?.name} color={selected?.unit_label} />
         </Canvas>
       </div>
     )
   }
 
   const images =
-    selectedPrice.product.name === 'Pad test'
+    selectedPrice?.product.name === 'Pad test'
       ? [
           {
             original: 'https://picsum.photos/id/1018/1000/600/',
@@ -165,14 +169,14 @@ const ProductDetails = ({ prices, id }) => {
     <div className='container mx-auto h-screen  flex gap-8  pt-10'>
       <ProductGallery images={images} />
       <div className='w-1/2'>
-        <h2 className='text-3xl font-bold mb-4'>{selected.name}</h2>
+        <h2 className='text-3xl font-bold mb-4'>{selected?.name}</h2>
         <p className='relative text-3xl text-black group-hover:text-black mb-4 font-light'>
-          {(selectedPrice.unit_amount / 100).toLocaleString('en-US', {
+          {(selectedPrice?.unit_amount / 100).toLocaleString('en-US', {
             style: 'currency',
             currency: currency
           })}
         </p>
-        <p className='mb-4'>{selectedPrice.product.description}</p>
+        <p className='mb-4'>{selectedPrice?.product.description}</p>
         <Select
           data={currencyData}
           selected={selected}
