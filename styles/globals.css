@@ -20,10 +20,16 @@
 }
 
 body{
-    /* background-color: #f0f0f0 */
-    background-color: #fff
+    background-color: #f0f0f0
+    /* background-color: #fff */
 }
 
-.image-gallery-icon {
-    /* display: none; */
+.image-gallery-image {
+    aspect-ratio: 1/1;
+    object-fit: cover !important;
+
+}
+
+.image-gallery-thumbnail:focus, .image-gallery-thumbnail.active, .image-gallery-thumbnail:hover {
+    border: 3px solid #FF5F49 !important
 }

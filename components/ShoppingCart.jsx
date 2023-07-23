@@ -148,7 +148,7 @@ export default function ShoppingCartSlideOver({ open, setCartSliderIsOpen }) {
                         <a
                           href='#'
                           onClick={handleCheckout}
-                          className='flex items-center justify-center rounded-md border border-transparent bg-main px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-dark'
+                          className='flex items-center justify-center rounded-md border border-transparent text-secondary bg-main px-6 py-3 text-base font-medium text-white shadow-sm hover:border hover:border-secondary hover:bg-white'
                         >
                           Checkout
                         </a>

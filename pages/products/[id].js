@@ -5,7 +5,6 @@ import { useCart } from '../../context/CartContext'
 import { useCurrency } from '../../context/CurrencyContext'
 import 'react-image-gallery/styles/css/image-gallery.css'
 import ProductGallery from '../../components/ProductGallery'
-import 'react-image-gallery/styles/css/image-gallery.css'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { Canvas, useThree, useFrame, extend } from '@react-three/fiber'
 import SplitPad from '../../components/SplitPad'
@@ -18,12 +17,13 @@ export async function getStaticPaths() {
   const paths = products.data.map(el => {
     const name = el.name.replace(/\s+/g, '-').toLowerCase()
     return {
-      params: { id: name }
+      params: { id: name, locale: 'pl' },
+      params: { id: name, locale: 'en' }
     }
   })
   return {
     paths,
-    fallback: false
+    fallback: true
   }
 }
 
@@ -53,18 +53,20 @@ const ProductDetails = ({ prices, id }) => {
     item => item.product.name.replace(/\s+/g, '-').toLowerCase() === id
   )
   const [currencyData, setCurrencyData] = useState(data)
-  const [selected, setSelected] = useState(currencyData[0]?.product)
+  const [selected, setSelected] = useState(currencyData?.[0].product)
   const { items, addItem } = useCart()
   const [error, setError] = useState('')
   const { width } = useWindowDimensions()
+
+  const firstWord = selected?.name?.split(' ')[0].toLowerCase()
 
   useEffect(() => {
     const filteredData = data?.filter(el => {
       return el.currency === currency
     })
     setCurrencyData(filteredData)
-    setSelected(filteredData[0]?.product)
-  }, [currency])
+    setSelected(filteredData?.[0].product)
+  }, [currency, prices])
 
   const addItemToCart = price => {
     addItem(price)
@@ -77,7 +79,8 @@ const ProductDetails = ({ prices, id }) => {
 
   const itemToCard = currencyData?.find(el => el.product?.id === selected?.id)
   const selectedPrice =
-    currencyData?.find(el => el.product?.id === selected?.id) || currencyData[0]
+    currencyData?.find(el => el.product?.id === selected?.id) ||
+    currencyData?.[0]
 
   extend({ OrbitControls })
 
@@ -104,7 +107,7 @@ const ProductDetails = ({ prices, id }) => {
 
   const renderItem = () => {
     return (
-      <div className=' aspect-video cursor-grab  bg-bg mx-auto'>
+      <div className=' aspect-square cursor-grab bg-bg mx-auto max-w-[700px] '>
         <Canvas
           orthographic
           camera={{
@@ -113,7 +116,7 @@ const ProductDetails = ({ prices, id }) => {
             right: 2,
             top: 2,
             bottom: -2,
-            zoom: width > 1535 ? 2000 : 1500
+            zoom: width > 1535 ? 2500 : 2000
           }}
         >
           <ambientLight intensity={0.8} />
@@ -131,58 +134,53 @@ const ProductDetails = ({ prices, id }) => {
     )
   }
 
-  const images =
-    selectedPrice?.product.name === 'Pad test'
-      ? [
-          {
-            original: 'https://picsum.photos/id/1018/1000/600/',
-            thumbnail: 'https://picsum.photos/id/1018/250/150/'
-          },
-          {
-            original: 'https://picsum.photos/id/1015/1000/600/',
-            thumbnail: 'https://picsum.photos/id/1015/250/150/'
-          },
-          {
-            original: 'https://picsum.photos/id/1019/1000/600/',
-            thumbnail: 'https://picsum.photos/id/1019/250/150/'
-          },
-          {
-            original: 'https://picsum.photos/id/1019/1000/600/',
-            thumbnail: 'https://picsum.photos/id/1019/250/150/',
-            renderItem: renderItem.bind(this)
-          }
-        ]
-      : [
-          {
-            original: 'https://picsum.photos/id/1018/1000/600/',
-            thumbnail: 'https://picsum.photos/id/1018/250/150/'
-          },
+  const testImages = [1, 2].map((el, i) => {
+    return {
+      original: `/assets/images/${firstWord}/${selected?.unit_label}-${
+        i + 1
+      }.jpg`,
+      thumbnail: `/assets/images/${firstWord}/${selected?.unit_label}-${
+        i + 1
+      }.jpg`
+    }
+  })
 
-          {
-            original: 'https://picsum.photos/id/1019/1000/600/',
-            thumbnail: 'https://picsum.photos/id/1019/250/150/',
-            renderItem: renderItem.bind(this)
-          }
-        ]
+  const images = [
+    ...testImages,
+    {
+      original: `/assets/images/${firstWord}/${selected?.unit_label}-${2}.jpg`,
+      thumbnail: `/assets/images/${firstWord}/${selected?.unit_label}-${2}.jpg`,
+      renderItem: renderItem.bind(this)
+    }
+  ]
 
   return (
-    <div className='container mx-auto h-screen  flex gap-8  pt-10'>
+    <div className='container mx-auto  flex  gap-32 items-center pt-10'>
       <ProductGallery images={images} />
-      <div className='w-1/2'>
-        <h2 className='text-3xl font-bold mb-4'>{selected?.name}</h2>
-        <p className='relative text-3xl text-black group-hover:text-black mb-4 font-light'>
-          {(selectedPrice?.unit_amount / 100).toLocaleString('en-US', {
-            style: 'currency',
-            currency: currency
-          })}
-        </p>
-        <p className='mb-4'>{selectedPrice?.product.description}</p>
-        <Select
-          data={currencyData}
-          selected={selected}
-          setSelected={setSelected}
-        />
-        <button onClick={() => addItemToCart(itemToCard)}>add</button>
+      <div className='w-2/5 flex flex-col '>
+        <div className='max-w-[300px]'>
+          <h2 className='text-5xl font-bold mb-2 '>{selected?.name}</h2>
+          <p className='font-semibold text-gray-400 mb-10'>Devon Pads</p>
+
+          <p className='mb-4'>{selectedPrice?.product.description}</p>
+          <Select
+            data={currencyData}
+            selected={selected}
+            setSelected={setSelected}
+          />
+          <p className='relative text-3xl text-black group-hover:text-black mb-4 font-light mt-10'>
+            {(selectedPrice?.unit_amount / 100).toLocaleString('en-US', {
+              style: 'currency',
+              currency: currency
+            })}
+          </p>
+          <button
+            onClick={() => addItemToCart(itemToCard)}
+            className='mt-10 flex items-center justify-center rounded-md border border-transparent bg-main px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-dark'
+          >
+            Add to cart
+          </button>
+        </div>
       </div>
     </div>
   )

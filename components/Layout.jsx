@@ -8,7 +8,7 @@ const Layout = ({ children }) => {
   const [cartSliderIsOpen, setCartSliderIsOpen] = useState(false)
 
   return (
-    <div className='min-h-screen flex flex-col pb-8'>
+    <div className='min-h-screen flex flex-col'>
       <Header setCartSliderIsOpen={setCartSliderIsOpen} />
 
       <ShoppingCartSlideOver

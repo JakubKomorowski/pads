@@ -15,13 +15,6 @@ const Products = ({ prices: { data = [] } }) => {
     setCurrencyData(filteredData)
   }, [currency])
 
-  console.log(currencyData)
-
-  const key = 'name'
-  const unique = [
-    ...new Map(currencyData.map(item => [item.product[key], item])).values()
-  ]
-
   const uniqueProducts = currencyData.filter(el => !el.product.unit_label)
 
   return (

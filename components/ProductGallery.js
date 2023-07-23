@@ -5,7 +5,7 @@ import 'react-image-gallery/styles/css/image-gallery.css'
 const ProductGallery = ({ images }) => {
   const LeftNav = ({ onClick }) => (
     <button
-      className='text-white absolute bg-transprent appearance-none border-none cursor-pointer outline-none z-10 hover:text-gray-200 image-gallery-left-nav'
+      className='text-white absolute bg-transprent appearance-none border-none cursor-pointer outline-none z-10 hover:text-main image-gallery-left-nav'
       onClick={onClick}
     >
       <svg
@@ -29,7 +29,7 @@ const ProductGallery = ({ images }) => {
 
   const RightNav = ({ onClick }) => (
     <button
-      className='text-white absolute bg-transprent appearance-none border-none cursor-pointer outline-none z-10 hover:scale-200 right-0 image-gallery-right-nav '
+      className='text-white absolute bg-transprent appearance-none border-none cursor-pointer outline-none z-10 hover:text-main right-0 image-gallery-right-nav '
       onClick={onClick}
     >
       <svg
@@ -52,10 +52,11 @@ const ProductGallery = ({ images }) => {
   )
 
   return (
-    <div className='w-1/2 cursor-grab aspect-video'>
+    <div className='w-3/5 aspect-square max-w-[700px] '>
       <ImageGallery
         items={images}
         showPlayButton={false}
+        showFullscreenButton={false}
         renderLeftNav={(onClick, disabled) => <LeftNav onClick={onClick} />}
         renderRightNav={(onClick, disabled) => <RightNav onClick={onClick} />}
       />

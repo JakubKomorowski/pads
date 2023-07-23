@@ -24,7 +24,7 @@ export default function Select({ data, selected, setSelected }) {
                 <Image
                   width='24px'
                   height='24px'
-                  src={`/assets/colors/${selected.unit_label} rect.png`}
+                  src={`/assets/colors/${selected?.unit_label} rect.png`}
                   alt=''
                   className='h-6 w-6 flex-shrink-0 rounded-full'
                 />
@@ -48,7 +48,7 @@ export default function Select({ data, selected, setSelected }) {
               leaveTo='opacity-0'
             >
               <Listbox.Options className='absolute z-10 mt-1 max-h-56  overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm'>
-                {filteredProducts.map(product => (
+                {filteredProducts?.map(product => (
                   <Listbox.Option
                     key={product?.id}
                     className={({ active }) =>

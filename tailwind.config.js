@@ -10,7 +10,8 @@ module.exports = {
         bg: '#f0f0f0',
         main: '#FF5F49',
         dark: '#ff3216',
-        grey: '#bfbfbf'
+        grey: '#bfbfbf',
+        secondary: '#191a18'
       },
       fontFamily: {
         mukta: 'Mukta'
