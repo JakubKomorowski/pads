@@ -3,7 +3,7 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
 const FrontPad = ({ color, name }) => {
   const [model, setModel] = useState()
-  const firstWord = name?.split(' ')[0]
+  const firstWord = name?.split(' ')[0].toLowerCase()
   useEffect(() => {
     new GLTFLoader().load(
       `/assets/${firstWord ? firstWord : 'split'}/${

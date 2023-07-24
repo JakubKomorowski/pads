@@ -155,9 +155,9 @@ const ProductDetails = ({ prices, id }) => {
   ]
 
   return (
-    <div className='container mx-auto  flex  gap-32 items-center pt-10'>
+    <div className='container mx-auto  flex  gap-24 items-center pt-10'>
       <ProductGallery images={images} />
-      <div className='w-2/5 flex flex-col '>
+      <div className='w-2/5 flex flex-col items-center'>
         <div className='max-w-[300px]'>
           <h2 className='text-5xl font-bold mb-2 '>{selected?.name}</h2>
           <p className='font-semibold text-gray-400 mb-10'>Devon Pads</p>
