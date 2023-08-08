@@ -16,6 +16,15 @@ const CartProvider = ({ children }) => {
     setItems([...items])
   }
 
+  const decreaseQuantity = price => {
+    items.forEach(item => {
+      if (item.id === price.id && item.quantity !== 1) {
+        item.quantity = item.quantity - 1
+      }
+    })
+    setItems([...items])
+  }
+
   const addItem = price => {
     if (items.length !== 0) {
       if (price.currency !== items[0].currency) return
@@ -50,7 +59,14 @@ const CartProvider = ({ children }) => {
 
   return (
     <CartContext.Provider
-      value={{ items, addItem, removeItem, resetCart, increaseQuantity }}
+      value={{
+        items,
+        addItem,
+        removeItem,
+        resetCart,
+        increaseQuantity,
+        decreaseQuantity
+      }}
     >
       {children}
     </CartContext.Provider>

@@ -55,6 +55,7 @@ const ProductGallery = ({ images }) => {
     <div className='w-3/5 aspect-square max-w-[700px] '>
       <ImageGallery
         items={images}
+        disableSwipe={true}
         showPlayButton={false}
         showFullscreenButton={false}
         renderLeftNav={(onClick, disabled) => <LeftNav onClick={onClick} />}

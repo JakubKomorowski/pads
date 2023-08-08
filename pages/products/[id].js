@@ -176,7 +176,7 @@ const ProductDetails = ({ prices, id }) => {
           </p>
           <button
             onClick={() => addItemToCart(itemToCard)}
-            className='mt-10 flex items-center justify-center rounded-md border border-transparent bg-main px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-dark'
+            className='flex mt-8 items-center justify-center rounded-md border border-transparent  bg-main px-6 py-3 text-base font-medium text-white shadow-sm hover:border hover:border-secondary hover:bg-white hover:text-secondary'
           >
             Add to cart
           </button>

@@ -6,6 +6,7 @@ import CameraControls from 'camera-controls'
 import FrontPad from '../components/SplitPad'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
+import useWindowDimensions from '../hooks/useWindowDimensions'
 
 export async function getStaticProps({ locale }) {
   return {
@@ -42,42 +43,45 @@ const Control = () => {
 
 const Home = () => {
   const { t } = useTranslation()
+  const { width } = useWindowDimensions()
 
   return (
-    <section className=' flex justify-center items-center flex-grow container mx-auto h-[calc(100vh-65px)]'>
-      <div className='w-2/6 min-w-[500px]'>
-        <div className='text-5xl font-bold font-mukta mb-10 leading-tight'>
-          {t('home_h1')}
+    <section className=' px-8 md:px-16'>
+      <div className=' flex justify-center items-center flex-grow container mx-auto h-auto flex-col-reverse lg:flex-row lg:h-[calc(100vh-65px)]'>
+        <div className=' w-full lg:w-2/6'>
+          <div className=' font-bold font-mukta mb-10 leading-tight'>
+            <h1>{t('home_h1')}</h1>
+          </div>
+          <button className=' bg-main px-14 py-4 rounded-full text-white border border-main text-2xl leading-normal font-bold transition-all duration-200 hover:border hover:border-secondary hover:text-secondary hover:bg-white'>
+            Shop now
+          </button>
         </div>
-        <button className=' bg-main px-14 py-4 rounded-full text-secondary border border-main text-2xl leading-normal font-bold transition-all duration-200 hover:border hover:border-secondary hover:bg-white'>
-          Shop now
-        </button>
-      </div>
 
-      <div className=' w-4/6 h-full cursor-grab active:cursor-grabbing	'>
-        <Canvas
-          orthographic
-          camera={{
-            position: [0, 0, 0.25],
-            left: -2,
-            right: 2,
-            top: 2,
-            bottom: -2,
-            zoom: 2500
-          }}
-        >
-          <ambientLight intensity={0.8} />
-          <spotLight
-            position={[-5, 0, 5]}
-            intensity={1}
-            castShadow
-            angle={Math.PI}
-          />
-          <spotLight position={[5, 0, 0]} penumbra={1} castShadow />
+        <div className=' w-full h-[400px] cursor-grab active:cursor-grabbing lg:h-full lg:w-4/6'>
+          <Canvas
+            orthographic
+            camera={{
+              position: [0, 0, 0.25],
+              left: -2,
+              right: 2,
+              top: 2,
+              bottom: -2,
+              zoom: width > 1535 ? 2500 : width < 600 ? 1200 : 1800
+            }}
+          >
+            <ambientLight intensity={0.8} />
+            <spotLight
+              position={[-5, 0, 5]}
+              intensity={1}
+              castShadow
+              angle={Math.PI}
+            />
+            <spotLight position={[5, 0, 0]} penumbra={1} castShadow />
 
-          <Control />
-          <FrontPad />
-        </Canvas>
+            <Control />
+            <FrontPad />
+          </Canvas>
+        </div>
       </div>
     </section>
   )

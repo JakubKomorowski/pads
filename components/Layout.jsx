@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 
 import Header from './Header'
 import Footer from './Footer'
@@ -8,14 +8,16 @@ const Layout = ({ children }) => {
   const [cartSliderIsOpen, setCartSliderIsOpen] = useState(false)
 
   return (
-    <div className='min-h-screen flex flex-col'>
+    <div className='min-h-screen flex flex-col '>
       <Header setCartSliderIsOpen={setCartSliderIsOpen} />
 
       <ShoppingCartSlideOver
         open={cartSliderIsOpen}
         setCartSliderIsOpen={setCartSliderIsOpen}
       />
-      <div className='px-16 '>{children}</div>
+      <Suspense fallback={<div>halo</div>} className='px-16 '>
+        {children}
+      </Suspense>
 
       <Footer />
     </div>

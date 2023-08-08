@@ -7,7 +7,7 @@ const NavItem = ({ href, text }) => {
   const { locale } = router
   return (
     <Link href={href} locale={locale}>
-      <a>{text}</a>
+      <a className='w-full flex justify-center'>{text}</a>
     </Link>
   )
 }
