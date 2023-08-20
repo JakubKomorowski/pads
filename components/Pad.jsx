@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
-const FrontPad = ({ color, name }) => {
+const Pad = ({ color, name }) => {
   const [model, setModel] = useState()
   const firstWord = name?.split(' ')[0].toLowerCase()
   useEffect(() => {
@@ -20,4 +20,4 @@ const FrontPad = ({ color, name }) => {
   )
 }
 
-export default FrontPad
+export default Pad

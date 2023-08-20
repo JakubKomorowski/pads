@@ -2,9 +2,10 @@
 import { Dialog } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { useCart } from '../context/CartContext'
-import { checkout } from '../lib/checkout'
 import SlideOver from './SlideOver'
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai'
+import Link from 'next/link'
+import { ROUTES } from '../routes'
 
 export default function ShoppingCartSlideOver({ open, setCartSliderIsOpen }) {
   const { items, removeItem, increaseQuantity, decreaseQuantity } = useCart()
@@ -12,11 +13,6 @@ export default function ShoppingCartSlideOver({ open, setCartSliderIsOpen }) {
     (acc, curr) => (acc += curr.unit_amount * curr.quantity),
     0
   )
-
-  const handleCheckout = event => {
-    event.preventDefault()
-    checkout(items)
-  }
 
   return (
     <SlideOver open={open} setOpen={setCartSliderIsOpen}>
@@ -121,13 +117,14 @@ export default function ShoppingCartSlideOver({ open, setCartSliderIsOpen }) {
             Shipping and taxes calculated at checkout.
           </p>
           <div className='mt-6'>
-            <a
-              href='#'
-              onClick={handleCheckout}
-              className='flex items-center justify-center rounded-md border border-transparent  bg-main px-6 py-3 text-base font-medium text-white shadow-sm hover:border hover:border-secondary hover:bg-white hover:text-secondary'
-            >
-              Checkout
-            </a>
+            <Link href={ROUTES['shipping-address']}>
+              <a
+                onClick={() => setCartSliderIsOpen(false)}
+                className='flex items-center justify-center rounded-md border border-transparent  bg-main px-6 py-3 text-base font-medium text-white shadow-sm hover:border hover:border-secondary hover:bg-white hover:text-secondary'
+              >
+                Checkout
+              </a>
+            </Link>
           </div>
           <div className='mt-6 flex justify-center text-center text-sm text-gray-500'>
             <p>

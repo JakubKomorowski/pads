@@ -25,6 +25,10 @@ body{
 
 }
 
+div[data-lastpass-icon-root="true"] {
+    display: none !important;
+}
+
 h1{
     font-size: 43px;
 }

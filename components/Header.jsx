@@ -105,7 +105,12 @@ const Header = ({ setCartSliderIsOpen }) => {
           <ul className='gap-10 hidden md:flex lg:gap-16'>
             {MENU_LIST.map(menu => {
               return (
-                <li key={menu.text} className='text-lg'>
+                <li
+                  key={menu.text}
+                  className='text-lg cursor-pointer relative transition-all w-min-content
+                before:w-0 before:h-px before:absolute before:bottom-0 before:right-0 before:bg-black before:transition-all before:duration-300
+                hover:before:w-full hover:before:left-0 hover:before:black'
+                >
                   <NavItem {...menu} locale={locale} />
                 </li>
               )

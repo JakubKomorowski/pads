@@ -11,12 +11,7 @@ const Card = ({ product }) => {
   }, [error])
   return (
     <div className='cursor-pointer'>
-      <Link
-        href={
-          // 'products/' + price.product.name.replace(/\s+/g, '-').toLowerCase()
-          'products/' + product.slug
-        }
-      >
+      <Link href={'products/' + product.slug}>
         <div className='relative group'>
           <div className='card w-80 md:w-96 bg-base-100 shadow-xl'>
             <figure>
@@ -32,10 +27,9 @@ const Card = ({ product }) => {
             </figure>
             <div className='card-body '>
               <h2 className='card-title'>{product.name}</h2>
-              {/* <p>{product.description}</p> */}
               <div className='card-actions justify-end'>
-                <button className='btn btn-primary bg-main text-white border-none hover:bg-dark'>
-                  Buy Now
+                <button className='ease-in duration-100 flex items-center justify-center rounded-md border border-transparent  bg-main px-6 py-3 text-base font-medium text-white shadow-sm hover:border hover:border-secondary hover:bg-white hover:text-secondary'>
+                  See more
                 </button>
               </div>
             </div>

@@ -7,7 +7,7 @@ import 'react-image-gallery/styles/css/image-gallery.css'
 import ProductGallery from '../../components/ProductGallery'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { Canvas, useThree, useFrame, extend } from '@react-three/fiber'
-import SplitPad from '../../components/SplitPad'
+import Pad from '../../components/Pad'
 import useWindowDimensions from '../../hooks/useWindowDimensions'
 
 export async function getStaticPaths() {
@@ -128,7 +128,7 @@ const ProductDetails = ({ prices, id }) => {
           />
           <spotLight position={[5, 0, 0]} penumbra={1} castShadow />
           <Control />
-          <SplitPad name={selected?.name} color={selected?.unit_label} />
+          <Pad name={selected?.name} color={selected?.unit_label} />
         </Canvas>
       </div>
     )

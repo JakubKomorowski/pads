@@ -8,9 +8,29 @@ const handler = async (req, res) => {
       if (!lineItems.length) {
         return res.status(400).json({ error: 'Bad Request!' })
       }
+
+      let currencyDevider = 1
+      if (customerData.currency === 'eur') currencyDevider = 4.6
+      if (customerData.currency === 'usd') currencyDevider = 4
+
+      let deliveryPricePLN = 2900
+      switch (customerData.country) {
+        case 'US':
+          deliveryPricePLN = 15000
+          break
+        case 'DE':
+          deliveryPricePLN = 6000
+          break
+        case 'ES':
+          deliveryPricePLN = 7000
+          break
+        default:
+          deliveryPricePLN = deliveryPricePLN
+      }
+
+      const deliveryPrice = Math.round(deliveryPricePLN / currencyDevider)
+
       const customer = await stripe.customers.create({
-        description:
-          'My First Test Customer (created for API docs at https://www.stripe.com/docs/api)',
         name: customerData.name,
         email: customerData.email,
         address: {
@@ -21,7 +41,6 @@ const handler = async (req, res) => {
       })
 
       const session = await stripe.checkout.sessions.create({
-        // payment_method_types: ['card', 'p24', 'blik'],
         payment_method_types: paymentMethod,
         line_items: lineItems,
         mode: 'payment',
@@ -35,36 +54,36 @@ const handler = async (req, res) => {
           enabled: true
         },
 
-        shipping_address_collection: {
-          allowed_countries: ['US', 'PL', 'DE', 'ES']
-        },
-        // shipping_options: [
-        //   {
-        //     shipping_rate_data: {
-        //       type: 'fixed_amount',
-        //       fixed_amount: {
-        //         amount: 150,
-        //         currency: 'pln'
-        //       },
-        //       display_name: 'Next day air',
-        //       delivery_estimate: {
-        //         minimum: {
-        //           unit: 'business_day',
-        //           value: 1
-        //         },
-        //         maximum: {
-        //           unit: 'business_day',
-        //           value: 1
-        //         }
-        //       }
-        //     }
-        //   }
-        // ],
+        // shipping_address_collection: {
+        //   allowed_countries: ['US', 'PL', 'DE', 'ES']
+        // },
         shipping_options: [
           {
-            shipping_rate: 'shr_1NQxZSLcxuTTAZuyOSeoxWDb'
+            shipping_rate_data: {
+              type: 'fixed_amount',
+              fixed_amount: {
+                amount: deliveryPrice,
+                currency: customerData.currency
+              },
+              display_name: 'DHL',
+              delivery_estimate: {
+                minimum: {
+                  unit: 'business_day',
+                  value: 2
+                },
+                maximum: {
+                  unit: 'business_day',
+                  value: 5
+                }
+              }
+            }
           }
         ],
+        // shipping_options: [
+        //   {
+        //     shipping_rate: 'shr_1NcvVqLcxuTTAZuyTKTtzsYf'
+        //   }
+        // ],
         allow_promotion_codes: true
       })
       return res.status(201).json({ session })
