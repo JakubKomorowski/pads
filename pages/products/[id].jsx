@@ -54,7 +54,7 @@ const ProductDetails = ({ prices, id }) => {
   )
   const [currencyData, setCurrencyData] = useState(data)
   const [selected, setSelected] = useState(currencyData?.[0].product)
-  const { items, addItem } = useCart()
+  const { addItem } = useCart()
   const [error, setError] = useState('')
   const { width } = useWindowDimensions()
 
