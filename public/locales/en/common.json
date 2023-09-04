@@ -1,3 +1,23 @@
 {
-    "home_h1": "Build with comfort and \n customizability in mind"
+    "home_h1": "Build with comfort and \n customizability in mind",
+    "shop_now": "Shop now",
+    "add_to_cart": "Add to cart",
+    "contact": "Contact",
+    "products": "Products",
+    "cart": "Cart",
+    "shopping_cart": "shopping cart",
+    "subtotal": "Subtotal",
+    "continue_shopping": "Countinue shopping",
+    "checkout": "Checkout",
+    "remove": "Remove",
+    "next": "Next",
+    "billing_details": "Billing details",
+    "shipping_address": "Shipping address",
+    "different_addres": "Different shipping address",
+    "full_name": "Full name",
+    "country": "Country",
+    "city": "City",
+    "street": "Street address",
+    "postal": "Postal code",
+    "state": "State"
 }

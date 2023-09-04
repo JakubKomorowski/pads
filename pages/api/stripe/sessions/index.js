@@ -14,7 +14,7 @@ const handler = async (req, res) => {
       if (customerData.currency === 'usd') currencyDevider = 4
 
       let deliveryPricePLN = 2900
-      switch (customerData.country) {
+      switch (customerData.shipping.country || customerData.country) {
         case 'US':
           deliveryPricePLN = 15000
           break
@@ -36,7 +36,20 @@ const handler = async (req, res) => {
         address: {
           country: customerData.country,
           city: customerData.city,
-          postal_code: customerData.postalCode
+          postal_code: customerData.postalCode,
+          state: customerData.state,
+          line1: customerData.street
+        },
+        shipping: {
+          name: customerData.name,
+          address: {
+            country: customerData.shipping.country || customerData.country,
+            city: customerData.shipping.city || customerData.city,
+            postal_code:
+              customerData.shipping.postalCode || customerData.postalCode,
+            state: customerData.shipping.state || customerData.state,
+            line1: customerData.shipping.street || customerData.street
+          }
         }
       })
 

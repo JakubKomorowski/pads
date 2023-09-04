@@ -6,7 +6,7 @@ const FormInput = ({ name, placeholder }) => {
     register
   } = useFormContext()
   return (
-    <div>
+    <div className='w-full '>
       <label className='label'>
         <span className='label-text'>{placeholder}</span>
       </label>

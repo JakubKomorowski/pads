@@ -134,6 +134,12 @@ const ProductDetails = ({ prices, id }) => {
     )
   }
 
+  const renderThumbnail = () => (
+    <span className='image-gallery-thumbnail-inner'>
+      <h1 className=''> 3D</h1>
+    </span>
+  )
+
   const testImages = [1, 2].map((el, i) => {
     return {
       original: `/assets/images/${firstWord}/${selected?.unit_label}-${
@@ -150,15 +156,16 @@ const ProductDetails = ({ prices, id }) => {
     {
       original: `/assets/images/${firstWord}/${selected?.unit_label}-${2}.jpg`,
       thumbnail: `/assets/images/${firstWord}/${selected?.unit_label}-${2}.jpg`,
+      renderThumbInner: renderThumbnail.bind(this),
       renderItem: renderItem.bind(this)
     }
   ]
 
   return (
-    <div className='container mx-auto  flex  gap-24 items-center pt-10'>
+    <div className='container mx-auto  flex flex-col gap-14 md:gap-24 items-center py-10 md:flex-row'>
       <ProductGallery images={images} />
-      <div className='w-2/5 flex flex-col items-center'>
-        <div className='max-w-[300px]'>
+      <div className=' w-full flex flex-col items-center pb-12 md:w-2/5'>
+        <div className='md:max-w-[400px]'>
           <h2 className='text-5xl font-bold mb-2 '>{selected?.name}</h2>
           <p className='font-semibold text-gray-400 mb-10'>Devon Pads</p>
 

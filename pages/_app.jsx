@@ -12,7 +12,7 @@ function App({ Component, pageProps }) {
       <CartProvider>
         <Layout>
           {isPageLoading ? (
-            <span className='mx-auto mt-[40vh] loading loading-ring loading-lg'></span>
+            <span className='ml-[48vw] mt-[40vh] loading loading-ring loading-lg'></span>
           ) : (
             <Component {...pageProps} />
           )}

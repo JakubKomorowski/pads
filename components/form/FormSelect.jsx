@@ -17,7 +17,7 @@ export default function FormSelect({ name, options }) {
   } = useFormContext()
 
   return (
-    <div className=''>
+    <div className='w-full'>
       <label className='label'>
         <span className='label-text'>Country</span>
       </label>

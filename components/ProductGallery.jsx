@@ -52,12 +52,12 @@ const ProductGallery = ({ images }) => {
   )
 
   return (
-    <div className='w-3/5 aspect-square max-w-[700px] '>
+    <div className=' w-full aspect-square  md:w-3/5 md:max-w-[700px]'>
       <ImageGallery
         items={images}
         disableSwipe={true}
         showPlayButton={false}
-        showFullscreenButton={false}
+        showFullscreenButton={true}
         renderLeftNav={(onClick, disabled) => <LeftNav onClick={onClick} />}
         renderRightNav={(onClick, disabled) => <RightNav onClick={onClick} />}
       />

@@ -1,3 +1,23 @@
 {
-    "home_h1": "Stworzone z myślą o wygodzie \n i indywidualnych potrzebach"
+    "home_h1": "Stworzone z myślą o wygodzie \n i indywidualnych potrzebach",
+    "shop_now": "Sprawdź ofertę",
+    "add_to_cart": "Dodaj do koszyka",
+    "contact": "Kontakt",
+    "products": "Produkty",
+    "cart": "Koszyk",
+    "shopping_cart": "Koszyk",
+    "subtotal": "Wartość koszyka",
+    "continue_shopping": "Kontynuuj zakupy",
+    "checkout": "Do kasy",
+    "remove": "Usuń",
+    "next": "Dalej",
+    "billing_details": "Szczegóły płatności",
+    "shipping_address": "Adres wysyłki",
+    "different_addres": "Inny adres wysyłki",
+    "full_name": "Imię i nazwisko",
+    "country": "Kraj",
+    "city": "Miasto",
+    "street": "Ulica i numer",
+    "postal": "Kod pocztowy",
+    "state": "Województwo"
 }

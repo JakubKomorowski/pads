@@ -7,6 +7,8 @@ import FrontPad from '../components/Pad'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
 import useWindowDimensions from '../hooks/useWindowDimensions'
+import { ROUTES } from '../routes'
+import Link from 'next/link'
 
 export async function getStaticProps({ locale }) {
   return {
@@ -32,7 +34,7 @@ const Control = () => {
     <orbitControls
       args={[camera, gl.domElement]}
       enableZoom={false}
-      autoRotate={false}
+      autoRotate={true}
       autoRotateSpeed={0.1}
       enableDamping={true}
       ref={orbitRef}
@@ -46,15 +48,17 @@ const Home = () => {
   const { width } = useWindowDimensions()
 
   return (
-    <section className=' px-8 md:px-16'>
+    <section>
       <div className=' flex justify-center items-center flex-grow container mx-auto h-auto flex-col-reverse lg:flex-row lg:h-[calc(100vh-65px)]'>
         <div className=' w-full lg:w-2/6'>
           <div className=' font-bold font-mukta mb-10 leading-tight'>
             <h1>{t('home_h1')}</h1>
           </div>
-          <button className=' bg-main px-14 py-4 rounded-full text-white border border-main text-2xl leading-normal font-bold transition-all duration-200 hover:border hover:border-secondary hover:text-secondary hover:bg-white'>
-            Shop now
-          </button>
+          <Link href={ROUTES['products']}>
+            <button className=' bg-main px-14 py-4 rounded-lg text-white border border-main text-2xl leading-normal font-bold transition-all duration-200 hover:border hover:border-secondary hover:text-secondary hover:bg-white'>
+              Shop now
+            </button>
+          </Link>
         </div>
 
         <div className=' w-full h-[400px] cursor-grab active:cursor-grabbing lg:h-full lg:w-4/6'>

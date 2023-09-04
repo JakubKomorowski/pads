@@ -34,7 +34,7 @@ const ShippingAddress = () => {
 
   const { watch } = methods
 
-  const differentAddress = watch('different-address')
+  const differentAddress = watch('differentAddress')
 
   console.log(differentAddress)
 
@@ -44,9 +44,9 @@ const ShippingAddress = () => {
   }
 
   return (
-    <section className='px-8 md:px-16 w-full  flex justify-center  flex-col mt-10'>
+    <section className='px-4 md:px-16 w-full  flex justify-center  flex-col mt-10'>
       <div className='container mx-auto flex justify-center items-center flex-col mb-10'>
-        <div>
+        <div className='w-full sm:w-fit'>
           <h1 className='justify-self-start'>Billing details</h1>
           <FormProvider {...methods}>
             <form
@@ -55,36 +55,36 @@ const ShippingAddress = () => {
             >
               <FormInput name='fullName' placeholder='Full name' />
               <FormInput name='email' placeholder='Email' />
-              <div className='flex justify-center  gap-4 items-start'>
+              <div className='flex justify-center  sm:gap-4 items-start flex-col w-full sm:flex-row'>
                 <FormSelect name='country' options={countryOptions} />
                 <FormInput name='city' placeholder='City' />
               </div>
               <FormInput name='street' placeholder='Street address' />
-              <div className='flex justify-center items-start gap-4'>
+              <div className='flex justify-center items-start gap-4 flex-col sm:flex-row'>
                 <FormInput name='postal' placeholder='Postal code' />
                 <FormInput name='state' placeholder='State' />
               </div>
-              <FormCheckbox name='different-address' />
+              <FormCheckbox name='differentAddress' />
               {differentAddress && (
                 <>
                   <h2>Shipping address</h2>
-                  <div className='flex justify-center  gap-4 items-start'>
+                  <div className='flex justify-center  sm:gap-4 items-start flex-col w-full sm:flex-row'>
                     <FormSelect
-                      name='shipping-country'
+                      name='shippingCountry'
                       options={countryOptions}
                     />
-                    <FormInput name='shipping-city' placeholder='City' />
+                    <FormInput name='shippingCity' placeholder='City' />
                   </div>
                   <FormInput
-                    name='shipping-street'
+                    name='shippingStreet'
                     placeholder='Street address'
                   />
-                  <div className='flex justify-center items-start gap-4'>
+                  <div className='flex justify-center items-start sm:gap-4 flex-col w-full sm:flex-row'>
                     <FormInput
-                      name='shipping-postal'
+                      name='shippingPostal'
                       placeholder='Postal code'
                     />
-                    <FormInput name='shipping-state' placeholder='State' />
+                    <FormInput name='shippingState' placeholder='State' />
                   </div>
                 </>
               )}

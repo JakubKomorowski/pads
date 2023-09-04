@@ -33,7 +33,6 @@ export default function ShoppingCartSlideOver({ open, setCartSliderIsOpen }) {
               </button>
             </div>
           </div>
-
           <div className='mt-8'>
             <div className='flow-root'>
               <ul role='list' className='-my-6 divide-y divide-gray-200'>
@@ -113,9 +112,7 @@ export default function ShoppingCartSlideOver({ open, setCartSliderIsOpen }) {
               })}
             </p>
           </div>
-          <p className='mt-0.5 text-sm text-gray-500'>
-            Shipping and taxes calculated at checkout.
-          </p>
+
           <div className='mt-6'>
             <Link href={ROUTES['shipping-address']}>
               <a
@@ -128,7 +125,6 @@ export default function ShoppingCartSlideOver({ open, setCartSliderIsOpen }) {
           </div>
           <div className='mt-6 flex justify-center text-center text-sm text-gray-500'>
             <p>
-              or{' '}
               <button
                 type='button'
                 className='font-medium text-main hover:text-dark'

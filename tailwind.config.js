@@ -11,7 +11,13 @@ module.exports = {
         main: '#FF5F49',
         dark: '#ff3216',
         grey: '#bfbfbf',
-        secondary: '#191a18'
+        secondary: '#191a18',
+        purple: '#BCBCFF',
+        green: '#98EFFF',
+        yellow: '#FFF485',
+        red: '#FF80A1',
+        black: '#000',
+        white: '#fff'
       },
       fontFamily: {
         mukta: 'Mukta'

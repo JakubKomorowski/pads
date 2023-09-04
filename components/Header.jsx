@@ -29,15 +29,15 @@ const Header = ({ setCartSliderIsOpen }) => {
       <div className='container mx-auto flex justify-between h-16 items-center'>
         <Link href='/' locale={locale}>
           <div className='flex items-center gap-3 cursor-pointer'>
-            <div className='w-8 h-8'>
+            <div className='w-11 h-11'>
               <Image
-                width='32px'
-                height='32px'
+                width='44px'
+                height='44px'
                 src='/assets/logo.svg'
                 alt='logo'
               />
             </div>
-            Logo
+            Devon Pads
           </div>
         </Link>
         <div className='flex items-center flex-row-reverse gap-2 md:gap-10 md:flex-row lg:gap-16'>
@@ -76,7 +76,7 @@ const Header = ({ setCartSliderIsOpen }) => {
                     </button>
                   </div>
                 </div>
-                <ul className='flex flex-col h-full gap-10 items-center'>
+                <ul className='flex flex-col  gap-10 items-center md:h-full'>
                   {MENU_LIST.map(menu => {
                     return (
                       <li key={menu.text} className='w-full  text-lg'>
