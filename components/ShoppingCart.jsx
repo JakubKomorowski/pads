@@ -6,6 +6,7 @@ import SlideOver from './SlideOver'
 import { AiOutlinePlus, AiOutlineMinus } from 'react-icons/ai'
 import Link from 'next/link'
 import { ROUTES } from '../routes'
+import { useTranslation } from 'next-i18next'
 
 export default function ShoppingCartSlideOver({ open, setCartSliderIsOpen }) {
   const { items, removeItem, increaseQuantity, decreaseQuantity } = useCart()
@@ -13,6 +14,7 @@ export default function ShoppingCartSlideOver({ open, setCartSliderIsOpen }) {
     (acc, curr) => (acc += curr.unit_amount * curr.quantity),
     0
   )
+  const { t } = useTranslation()
 
   return (
     <SlideOver open={open} setOpen={setCartSliderIsOpen}>
@@ -20,7 +22,7 @@ export default function ShoppingCartSlideOver({ open, setCartSliderIsOpen }) {
         <div className='flex-1 overflow-y-auto py-6 px-4 sm:px-6'>
           <div className='flex items-start justify-between'>
             <Dialog.Title className='text-lg font-medium text-gray-900'>
-              Shopping cart
+              {t('shopping_cart')}
             </Dialog.Title>
             <div className='ml-3 flex h-7 items-center'>
               <button
@@ -90,7 +92,7 @@ export default function ShoppingCartSlideOver({ open, setCartSliderIsOpen }) {
                             onClick={() => removeItem(price.id)}
                             className='font-medium text-main hover:text-dark'
                           >
-                            Remove
+                            {t('remove')}
                           </button>
                         </div>
                       </div>
@@ -104,7 +106,7 @@ export default function ShoppingCartSlideOver({ open, setCartSliderIsOpen }) {
 
         <div className='border-t border-gray-200 py-6 px-4 sm:px-6'>
           <div className='flex justify-between text-base font-medium text-gray-900'>
-            <p>Subtotal</p>
+            <p>{t('subtotal')}</p>
             <p>
               {(subTotal / 100).toLocaleString('en-US', {
                 style: 'currency',
@@ -119,7 +121,7 @@ export default function ShoppingCartSlideOver({ open, setCartSliderIsOpen }) {
                 onClick={() => setCartSliderIsOpen(false)}
                 className='flex items-center justify-center rounded-md border border-transparent  bg-main px-6 py-3 text-base font-medium text-white shadow-sm hover:border hover:border-secondary hover:bg-white hover:text-secondary'
               >
-                Checkout
+                {t('checkout')}
               </a>
             </Link>
           </div>
@@ -130,7 +132,7 @@ export default function ShoppingCartSlideOver({ open, setCartSliderIsOpen }) {
                 className='font-medium text-main hover:text-dark'
                 onClick={() => setCartSliderIsOpen(false)}
               >
-                Continue Shopping
+                {t('continue_shopping')}
                 <span aria-hidden='true'> &rarr;</span>
               </button>
             </p>

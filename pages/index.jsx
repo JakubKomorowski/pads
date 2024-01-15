@@ -46,6 +46,7 @@ const Control = () => {
 const Home = () => {
   const { t } = useTranslation()
   const { width } = useWindowDimensions()
+  console.log(t('see_more'))
 
   return (
     <section>
@@ -56,7 +57,7 @@ const Home = () => {
           </div>
           <Link href={ROUTES['products']}>
             <button className=' bg-main px-14 py-4 rounded-lg text-white border border-main text-2xl leading-normal font-bold transition-all duration-200 hover:border hover:border-secondary hover:text-secondary hover:bg-white'>
-              Shop now
+              {t('shop_now')}
             </button>
           </Link>
         </div>

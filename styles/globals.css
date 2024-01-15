@@ -49,9 +49,18 @@ h2{
 .image-gallery-image {
     aspect-ratio: 1/1;
     object-fit: cover !important;
-
+}
+.image-gallery-thumbnails-container{
+display: flex;
+justify-content: center;
+align-items: center;
 }
 
+.image-gallery-thumbnail{
+    height: fit-content;
+    min-height: 100px;
+}
 .image-gallery-thumbnail:focus, .image-gallery-thumbnail.active, .image-gallery-thumbnail:hover {
-    border: 3px solid #FF5F49 !important
+    border: 3px solid #FF5F49 !important;
+   
 }

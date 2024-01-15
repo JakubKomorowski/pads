@@ -135,7 +135,7 @@ const ProductDetails = ({ prices, id }) => {
   }
 
   const renderThumbnail = () => (
-    <span className='image-gallery-thumbnail-inner'>
+    <span className='image-gallery-thumbnail-inner flex items-start'>
       <h1 className=''> 3D</h1>
     </span>
   )

@@ -10,10 +10,13 @@ import { useCurrency } from '../context/CurrencyContext'
 import { useState } from 'react'
 import SlideOver from './SlideOver'
 import { XMarkIcon } from '@heroicons/react/24/outline'
+import { useTranslation } from 'next-i18next'
 
-const Header = ({ setCartSliderIsOpen }) => {
+const Header = ({ setCartSliderIsOpen, route }) => {
   const router = useRouter()
-  const { locales, locale, pathname } = router
+  const { t } = useTranslation()
+
+  const { locales, locale, pathname, asPath } = router
   const { items } = useCart()
   const itemsNumber = items.reduce((acc, curr) => (acc += curr.quantity), 0)
   const currencies = ['eur', 'pln', 'usd']
@@ -21,7 +24,9 @@ const Header = ({ setCartSliderIsOpen }) => {
   const [openMenu, setOpenMenu] = useState(false)
 
   const handleLanguageChange = lang => {
-    router.push({ pathname }, { pathname }, { locale: lang })
+    router.push({ asPath }, `${asPath}`, {
+      locale: lang
+    })
   }
 
   return (
@@ -80,7 +85,11 @@ const Header = ({ setCartSliderIsOpen }) => {
                   {MENU_LIST.map(menu => {
                     return (
                       <li key={menu.text} className='w-full  text-lg'>
-                        <NavItem {...menu} locale={locale} />
+                        <NavItem
+                          href={menu.href}
+                          text={t(menu.text)}
+                          locale={locale}
+                        />
                       </li>
                     )
                   })}
@@ -111,7 +120,11 @@ const Header = ({ setCartSliderIsOpen }) => {
                 before:w-0 before:h-px before:absolute before:bottom-0 before:right-0 before:bg-black before:transition-all before:duration-300
                 hover:before:w-full hover:before:left-0 hover:before:black'
                 >
-                  <NavItem {...menu} locale={locale} />
+                  <NavItem
+                    href={menu.href}
+                    text={t(menu.text)}
+                    locale={locale}
+                  />
                 </li>
               )
             })}
@@ -138,7 +151,7 @@ const Header = ({ setCartSliderIsOpen }) => {
             before:w-0 before:h-px before:absolute before:bottom-0 before:right-0 before:bg-black before:transition-all before:duration-300
             hover:before:w-full hover:before:left-0 hover:before:black text-lg'
           >
-            Cart
+            {t('cart')}
             <span className='ml-1 '>({itemsNumber})</span>
             <span className='sr-only'>items in cart, view bag</span>
           </div>

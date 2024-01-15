@@ -1,4 +1,14 @@
+import { useTranslation } from 'next-i18next'
 import Card from '../../components/Card'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+
+export async function getStaticProps({ locale }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ['common']))
+    }
+  }
+}
 
 const Products = () => {
   const uniqueProducts = [

@@ -19,5 +19,6 @@
     "city": "City",
     "street": "Street address",
     "postal": "Postal code",
-    "state": "State"
+    "state": "State",
+    "see_more": "See more"
 }

@@ -1,7 +1,4 @@
-export const MENU_LIST = [
-  { text: 'Products', href: '/products' },
-  { text: 'Contact', href: '/contact' }
-]
+export const MENU_LIST = [{ text: 'products', href: '/products' }]
 
 export const ROUTES = {
   products: '/products',

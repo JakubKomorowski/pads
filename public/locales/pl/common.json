@@ -19,5 +19,6 @@
     "city": "Miasto",
     "street": "Ulica i numer",
     "postal": "Kod pocztowy",
-    "state": "Województwo"
+    "state": "Województwo",
+    "see_more": "Zobacz więcej"
 }

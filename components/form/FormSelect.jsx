@@ -2,6 +2,7 @@ import { Fragment, useEffect, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import { useFormContext } from 'react-hook-form'
+import { useTranslation } from 'next-i18next'
 
 export default function FormSelect({ name, options }) {
   const [selected, setSelected] = useState(options[0])
@@ -16,10 +17,12 @@ export default function FormSelect({ name, options }) {
     setValue
   } = useFormContext()
 
+  const { t } = useTranslation()
+
   return (
     <div className='w-full'>
       <label className='label'>
-        <span className='label-text'>Country</span>
+        <span className='label-text'>{t('country')}</span>
       </label>
       <Listbox
         {...register(name)}
