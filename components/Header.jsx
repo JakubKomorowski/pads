@@ -12,11 +12,11 @@ import SlideOver from './SlideOver'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { useTranslation } from 'next-i18next'
 
-const Header = ({ setCartSliderIsOpen, route }) => {
+const Header = ({ setCartSliderIsOpen }) => {
   const router = useRouter()
   const { t } = useTranslation()
 
-  const { locales, locale, pathname, asPath } = router
+  const { locales, locale, asPath } = router
   const { items } = useCart()
   const itemsNumber = items.reduce((acc, curr) => (acc += curr.quantity), 0)
   const currencies = ['eur', 'pln', 'usd']
@@ -28,6 +28,8 @@ const Header = ({ setCartSliderIsOpen, route }) => {
       locale: lang
     })
   }
+
+  console.log(t('cart'))
 
   return (
     <nav className=' border-b border-grey px-8 md:px-16 font-mukta text-xl '>

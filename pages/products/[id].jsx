@@ -9,6 +9,8 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { Canvas, useThree, useFrame, extend } from '@react-three/fiber'
 import Pad from '../../components/Pad'
 import useWindowDimensions from '../../hooks/useWindowDimensions'
+import { useTranslation } from 'next-i18next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 export async function getStaticPaths() {
   const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
@@ -41,13 +43,15 @@ export const getStaticProps = async context => {
   return {
     props: {
       prices,
-      id
+      id,
+      ...(await serverSideTranslations(context.locale, ['common']))
     },
     notFound: false
   }
 }
 
 const ProductDetails = ({ prices, id }) => {
+  const { t } = useTranslation()
   const { currency } = useCurrency()
   const data = prices?.data.filter(
     item => item.product.name.replace(/\s+/g, '-').toLowerCase() === id
@@ -185,7 +189,7 @@ const ProductDetails = ({ prices, id }) => {
             onClick={() => addItemToCart(itemToCard)}
             className='flex mt-8 items-center justify-center rounded-md border border-transparent  bg-main px-6 py-3 text-base font-medium text-white shadow-sm hover:border hover:border-secondary hover:bg-white hover:text-secondary'
           >
-            Add to cart
+            {t('shop_now')}
           </button>
         </div>
       </div>
