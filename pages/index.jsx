@@ -46,7 +46,6 @@ const Control = () => {
 const Home = () => {
   const { t } = useTranslation()
   const { width } = useWindowDimensions()
-  console.log(t('see_more'))
 
   return (
     <section>
